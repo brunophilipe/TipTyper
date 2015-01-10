@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Bruno Philipe. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @interface BPTextView : NSTextView
 

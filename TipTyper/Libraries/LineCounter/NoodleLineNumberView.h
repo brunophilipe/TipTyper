@@ -27,19 +27,11 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 @class NoodleLineNumberMarker;
 
 @interface NoodleLineNumberView : NSRulerView
-{
-	// Maps line numbers to markers
-	NSMutableDictionary	*linesToMarkers;
-	NSFont              *font;
-	NSColor				*textColor;
-	NSColor				*alternateTextColor;
-	NSColor				*backgroundColor;
-}
 
 // Array of character indices for the beginning of each line
 @property (atomic, retain) NSMutableArray *lineIndices;

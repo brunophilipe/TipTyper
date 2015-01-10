@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Bruno Philipe. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 #import "BPDocument.h"
 
 extern NSString *const kBPDefaultFont;

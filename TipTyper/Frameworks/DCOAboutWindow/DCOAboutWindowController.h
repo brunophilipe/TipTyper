@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Danger Cove. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 /**
  *  The about window.

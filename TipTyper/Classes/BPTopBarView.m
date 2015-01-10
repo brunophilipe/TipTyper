@@ -10,7 +10,7 @@
 
 @implementation BPTopBarView
 {
-	NSBezierPath *path;
+	NSBezierPath *_path;
 	CGFloat scaleFactor;
 }
 
@@ -22,8 +22,8 @@
 		[self setBackgroundColor:NSColorFromRGB(0xededed)];
 		[self setTopBorderColor:NSColorFromRGB(0x9f9f9f)];
 		scaleFactor = [self.window backingScaleFactor];
-		path = [NSBezierPath bezierPath];
-		[path setLineWidth:scaleFactor];
+		_path = [NSBezierPath bezierPath];
+		[_path setLineWidth:scaleFactor];
     }
     return self;
 }
@@ -35,10 +35,10 @@
     // Drawing code here.
 	[self.topBorderColor setStroke];
 
-	[path removeAllPoints];
-	[path moveToPoint:NSMakePoint(0, self.bounds.size.height-(scaleFactor == 1 ? 1 : 1.5))];
-	[path lineToPoint:NSMakePoint(self.bounds.size.width, self.bounds.size.height-(scaleFactor == 1 ? 1 : 1.5))];
-	[path stroke];
+	[_path removeAllPoints];
+	[_path moveToPoint:NSMakePoint(0, self.bounds.size.height-(scaleFactor == 1 ? 1 : 1.5))];
+	[_path lineToPoint:NSMakePoint(self.bounds.size.width, self.bounds.size.height-(scaleFactor == 1 ? 1 : 1.5))];
+	[_path stroke];
 }
 
 @end

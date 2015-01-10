@@ -39,9 +39,6 @@ typedef enum {
 
 			case BPHiddenGlypthTab:
 				return TAB;
-
-			default:
-				return nil;
 		}
 	}
 }
@@ -49,7 +46,7 @@ typedef enum {
 + (NSFont*)cachedInvisibleGlyphFontWithSize:(CGFloat)size
 {
 	NSFont *font;
-	CGFloat lastSize;
+	CGFloat lastSize = -1.0;
 	@synchronized(self)
 	{
 		if (!font || lastSize != size) {

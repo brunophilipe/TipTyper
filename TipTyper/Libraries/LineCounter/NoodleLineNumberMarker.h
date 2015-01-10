@@ -27,13 +27,10 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
 
 @interface NoodleLineNumberMarker : NSRulerMarker
-{
-	unsigned		lineNumber;
-}
 
 - (id)initWithRulerView:(NSRulerView *)aRulerView lineNumber:(float)line image:(NSImage *)anImage imageOrigin:(NSPoint)imageOrigin;
 

@@ -31,6 +31,9 @@
 
 
 @implementation NoodleLineNumberMarker
+{
+    unsigned lineNumber;
+}
 
 - (id)initWithRulerView:(NSRulerView *)aRulerView lineNumber:(float)line image:(NSImage *)anImage imageOrigin:(NSPoint)imageOrigin
 {

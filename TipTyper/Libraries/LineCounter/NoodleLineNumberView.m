@@ -46,6 +46,13 @@
 @implementation NoodleLineNumberView
 {
 	NSMutableArray *_lineIndices;
+    
+    // Maps line numbers to markers
+    NSMutableDictionary	*linesToMarkers;
+    NSFont              *font;
+    NSColor				*textColor;
+    NSColor				*alternateTextColor;
+    NSColor				*backgroundColor;
 }
 
 - (id)initWithScrollView:(NSScrollView *)aScrollView

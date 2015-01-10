@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Bruno Philipe. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface BPEncodingTool : NSObject
 
