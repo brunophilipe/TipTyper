@@ -145,7 +145,7 @@ typedef enum {
 	NSMutableParagraphStyle* paragraphStyle = [[self.textView defaultParagraphStyle] mutableCopy];
 
 	if (paragraphStyle == nil) {
-	paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
+		paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	}
 
 	float charWidth = [[self.textView.font screenFontWithRenderingMode:NSFontAntialiasedRenderingMode] advancementForGlyph:(NSGlyph) ' '].width;

@@ -69,8 +69,6 @@
 		[self.displayWindow updateTextViewContents];
 		return YES;
 	} else {
-		NSAlert *alert = [NSAlert alertWithError:error];
-		[alert runModal];
 		*outError = error;
 		return NO;
 	}
