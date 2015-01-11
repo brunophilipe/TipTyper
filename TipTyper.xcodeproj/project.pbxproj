@@ -87,6 +87,8 @@
 		15408A6E18E3CA8B00127DA6 /* DCOTransparentScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCOTransparentScrollView.m; sourceTree = "<group>"; };
 		15753F5618AC78F5009E7E9E /* BPApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPApplication.h; sourceTree = "<group>"; };
 		15753F5718AC78F5009E7E9E /* BPApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPApplication.m; sourceTree = "<group>"; };
+		157D76121A633F5200223367 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
+		157D76141A633F7A00223367 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		15962E811A0C6CB200E168EC /* BPPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPPreferencesWindowController.h; sourceTree = "<group>"; };
 		15962E821A0C6CB200E168EC /* BPPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPPreferencesWindowController.m; sourceTree = "<group>"; };
 		15C21D3618A83D5500C9D410 /* TipTyper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipTyper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +237,8 @@
 				15C21D4518A83D5500C9D410 /* main.m */,
 				15C21D4718A83D5500C9D410 /* TipTyper-Prefix.pch */,
 				15E4929F18A9B1FB004C4901 /* BumpBuild.sh */,
+				157D76121A633F5200223367 /* LICENSE */,
+				157D76141A633F7A00223367 /* README.md */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
