@@ -22,7 +22,8 @@ TipTyper is the product of this frustration. It does everything I need, is light
 * Support for dictation and speech.
 * Spell check and grammar.
 * Automatic update checker and downloader (thanks to Sparkle).
-* The minimum supported OS X version is OS X 10.7, but it was only tested on OS X 10.9 and 10.10. Feedback is welcome!
+
+The minimum supported OS X version is OS X 10.7, but it was only tested on OS X 10.9 and 10.10. Feedback is welcome!
 
 I most certainly wish to add more features in the future versions, so if you use it, please stay tuned!
 
