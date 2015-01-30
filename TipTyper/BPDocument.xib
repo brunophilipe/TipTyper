@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6724" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment version="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6724"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BPDocument">
@@ -26,31 +26,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="601" height="21"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="BWk-tL-d0U">
-                                <rect key="frame" x="152" y="2" width="178" height="17"/>
+                                <rect key="frame" x="155" y="2" width="144" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" priority="250" constant="174" id="lxb-Sh-OYZ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="lxb-Sh-OYZ"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Characters: 0" id="Zuk-dd-NP9">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Characters: 0" id="Zuk-dd-NP9">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="DBZ-do-UWP">
-                                <rect key="frame" x="333" y="2" width="134" height="17"/>
+                                <rect key="frame" x="302" y="2" width="144" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" priority="250" constant="130" id="ghp-Sy-6uy"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="ghp-Sy-6uy"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Lines: 0" id="kmk-nm-A8O">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Lines: 0" id="kmk-nm-A8O">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="4" translatesAutoresizingMaskIntoConstraints="NO" id="6qa-BO-blx">
-                                <rect key="frame" x="472" y="2" width="123" height="17"/>
+                                <rect key="frame" x="451" y="2" width="144" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" priority="250" constant="119" id="ojM-l4-6rS"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="ojM-l4-6rS"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="UTF-8" id="85B-6h-e6m">
                                     <font key="font" metaFont="system"/>
@@ -59,9 +59,9 @@
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="83o-8k-gI1">
-                                <rect key="frame" x="6" y="2" width="142" height="17"/>
+                                <rect key="frame" x="6" y="2" width="145" height="17"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" priority="250" constant="138" id="IQq-MN-fKc"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="IQq-MN-fKc"/>
                                 </constraints>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Words: 0" id="CYR-p5-WsR">
                                     <font key="font" metaFont="system"/>
@@ -75,10 +75,13 @@
                             <constraint firstAttribute="bottom" secondItem="DBZ-do-UWP" secondAttribute="bottom" constant="2" id="9Hd-YK-vNQ"/>
                             <constraint firstItem="DBZ-do-UWP" firstAttribute="leading" secondItem="BWk-tL-d0U" secondAttribute="trailing" constant="7" id="AUg-hy-GCJ"/>
                             <constraint firstItem="83o-8k-gI1" firstAttribute="leading" secondItem="OgU-xF-SWb" secondAttribute="leading" constant="8" id="DPG-Uh-mh9"/>
+                            <constraint firstItem="6qa-BO-blx" firstAttribute="width" secondItem="83o-8k-gI1" secondAttribute="width" id="GQ4-H9-Lwi"/>
                             <constraint firstAttribute="trailing" secondItem="6qa-BO-blx" secondAttribute="trailing" constant="8" id="GsI-hY-Jq2"/>
+                            <constraint firstItem="6qa-BO-blx" firstAttribute="width" secondItem="BWk-tL-d0U" secondAttribute="width" id="PuY-5I-lC0"/>
                             <constraint firstAttribute="height" constant="21" id="Q7R-H4-U7m"/>
                             <constraint firstAttribute="bottom" secondItem="6qa-BO-blx" secondAttribute="bottom" constant="2" id="TwE-Ur-MxR"/>
                             <constraint firstAttribute="bottom" secondItem="83o-8k-gI1" secondAttribute="bottom" constant="2" id="Vz8-Vb-etg"/>
+                            <constraint firstItem="6qa-BO-blx" firstAttribute="width" secondItem="DBZ-do-UWP" secondAttribute="width" id="XxR-K6-Bxg"/>
                             <constraint firstItem="6qa-BO-blx" firstAttribute="leading" secondItem="DBZ-do-UWP" secondAttribute="trailing" constant="9" id="oHO-Jj-LKt"/>
                             <constraint firstAttribute="bottom" secondItem="BWk-tL-d0U" secondAttribute="bottom" constant="2" id="ptS-8V-l1h"/>
                         </constraints>
@@ -97,10 +100,10 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="600" height="460"/>
-                                            <size key="maxSize" width="600" height="10000000"/>
+                                            <size key="maxSize" width="663" height="10000000"/>
                                             <color key="insertionPointColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="600" height="460"/>
-                                            <size key="maxSize" width="600" height="10000000"/>
+                                            <size key="maxSize" width="663" height="10000000"/>
                                         </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
