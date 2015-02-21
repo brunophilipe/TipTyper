@@ -38,9 +38,9 @@ typedef enum {
 	{
 		if (!CRLF)
 		{
-			CRLF	= @"⤦";
+			CRLF	= @"↩︎";
 			SPACE	= @"⎵";
-			TAB		= @"⟶";
+			TAB		= @"⇥";
 		}
 
 		switch (glypth) {
@@ -118,7 +118,7 @@ typedef enum {
 				glyphPoint = [self locationForGlyphAtIndex:i];
 				glyphRect = [self lineFragmentRectForGlyphAtIndex:i effectiveRange:NULL];
 				glyphPoint.x += glyphRect.origin.x - 1;
-				glyphPoint.y = glyphRect.origin.y + 1;
+				glyphPoint.y = glyphRect.origin.y + 4;
 				[glyph drawAtPoint:glyphPoint withAttributes:attr];
 			}
 		}
