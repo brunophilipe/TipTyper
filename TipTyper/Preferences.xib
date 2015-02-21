@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6250"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BPPreferencesWindowController">
@@ -351,7 +351,7 @@
                     </constraints>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" id="Jo0-xw-0Y1">
                         <font key="font" metaFont="system"/>
-                        <string key="title">If this option is enabled, all invisible characters (Space, Tab, and New Line) will be drawn as visible characters: ( ⎵ , →, ⤦ ) respectively.</string>
+                        <string key="title">If this option is enabled, all invisible characters (Space, Tab, and New Line) will be drawn as visible characters: ( ⎵ , ⇥, ↩︎ ) respectively.</string>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>

@@ -122,9 +122,6 @@
 	}
 }
 
-- (void)changeFont:(id)sender
-{}
-
 - (void)insertTab:(id)sender
 {
 	if (self.shouldInsertSpacesInsteadOfTabs) {
