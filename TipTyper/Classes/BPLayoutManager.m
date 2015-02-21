@@ -40,7 +40,7 @@ typedef enum {
 		{
 			CRLF	= @"⤦";
 			SPACE	= @"⎵";
-			TAB		= @"→";
+			TAB		= @"⟶";
 		}
 
 		switch (glypth) {
@@ -63,7 +63,7 @@ typedef enum {
 	@synchronized(self)
 	{
 		if (!font || lastSize != size) {
-			font = [NSFont fontWithName:@"Helvetica" size:size];
+			font = [NSFont fontWithName:@"Inconsolata" size:size];
 			lastSize = size;
 		}
 	}
@@ -80,7 +80,7 @@ typedef enum {
 		NSString *glyph = nil;
 		NSPoint glyphPoint;
 		NSRect glyphRect;
-		NSDictionary *attr = @{NSForegroundColorAttributeName: [self.textViewForBeginningOfSelection.backgroundColor isDarkColor] ? [NSColor grayColor] : [NSColor lightGrayColor], NSFontAttributeName: [BPLayoutManager cachedInvisibleGlyphFontWithSize:userFontSize]};
+		NSDictionary *attr = @{NSForegroundColorAttributeName: [self.textViewForBeginningOfSelection.backgroundColor isDarkColor] ? [NSColor grayColor] : [NSColor lightGrayColor], NSFontAttributeName: [BPLayoutManager cachedInvisibleGlyphFontWithSize:userFontSize*0.8]};
 
 		//loop thru current range, drawing glyphs
 		for (NSUInteger i = glyphRange.location; i < NSMaxRange(glyphRange); i++)
@@ -88,6 +88,14 @@ typedef enum {
 			//look for special chars
 			switch ([docContents characterAtIndex:i])
 			{
+					//eol
+				case 0x2028:
+				case 0x2029:
+				case '\n':
+				case '\r':
+					glyph = [BPLayoutManager stringForHiddenGlypth:BPHiddenGlypthNewLine];
+					break;
+					
 					//space
 				case ' ':
 					glyph = [BPLayoutManager stringForHiddenGlypth:BPHiddenGlypthSpace];
@@ -96,14 +104,6 @@ typedef enum {
 					//tab
 				case '\t':
 					glyph = [BPLayoutManager stringForHiddenGlypth:BPHiddenGlypthTab];
-					break;
-
-					//eol
-				case 0x2028:
-				case 0x2029:
-				case '\n':
-				case '\r':
-					glyph = [BPLayoutManager stringForHiddenGlypth:BPHiddenGlypthNewLine];
 					break;
 
 					//do nothing
@@ -117,8 +117,8 @@ typedef enum {
 			{
 				glyphPoint = [self locationForGlyphAtIndex:i];
 				glyphRect = [self lineFragmentRectForGlyphAtIndex:i effectiveRange:NULL];
-				glyphPoint.x += glyphRect.origin.x;
-				glyphPoint.y = glyphRect.origin.y - 2;
+				glyphPoint.x += glyphRect.origin.x - 1;
+				glyphPoint.y = glyphRect.origin.y + 1;
 				[glyph drawAtPoint:glyphPoint withAttributes:attr];
 			}
 		}
