@@ -429,12 +429,22 @@ typedef enum {
 	field = [[NSTextField alloc] initWithFrame:NSMakeRect(0, 0, 100, 22)];
 	[alert setAccessoryView:field];
 	[alert setAlertStyle:NSInformationalAlertStyle];
-
-	[alert beginSheetModalForWindow:self completionHandler:^(NSModalResponse returnCode) {
+	
+	void (^completion)(NSModalResponse returnCode) = ^(NSModalResponse returnCode) {
 		if (returnCode == 1) {
 			[self goToLine:MAX(1, field.integerValue)];
 		}
-	}];
+	};
+	
+	if ([alert respondsToSelector:@selector(beginSheetModalForWindow:completionHandler:)])
+	{
+		[alert beginSheetModalForWindow:self completionHandler:completion];
+	}
+	else
+	{
+		NSModalResponse returnCode = [alert runModal];
+		completion(returnCode);
+	}
 }
 
 - (IBAction)action_switch_changeFontSize:(id)sender {

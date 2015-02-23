@@ -199,7 +199,11 @@
 
 - (BOOL)prepareSavePanel:(NSSavePanel *)savePanel
 {
-	[savePanel setShowsTagField:YES];
+	if ([savePanel respondsToSelector:@selector(setShowsTagField:)])
+	{
+		[savePanel setShowsTagField:YES];
+	}
+	
 	[savePanel setAllowsOtherFileTypes:YES];
 	[savePanel setExtensionHidden:NO];
   

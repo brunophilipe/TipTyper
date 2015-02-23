@@ -64,6 +64,10 @@ typedef enum {
 	{
 		if (!font || lastSize != size) {
 			font = [NSFont fontWithName:@"Inconsolata" size:size];
+			if (!font)
+			{
+				font = [NSFont fontWithName:@"Helvetica" size:size];
+			}
 			lastSize = size;
 		}
 	}
@@ -77,6 +81,7 @@ typedef enum {
 	if (window.isDisplayingInvisibles) {
 		NSString *docContents = [self.textStorage string];
 		CGFloat userFontSize = [self.textStorage font].pointSize;
+		CGFloat pointScale = [[NSApp mainWindow] backingScaleFactor];
 		NSString *glyph = nil;
 		NSPoint glyphPoint;
 		NSRect glyphRect;
@@ -117,8 +122,8 @@ typedef enum {
 			{
 				glyphPoint = [self locationForGlyphAtIndex:i];
 				glyphRect = [self lineFragmentRectForGlyphAtIndex:i effectiveRange:NULL];
-				glyphPoint.x += glyphRect.origin.x - 1;
-				glyphPoint.y = glyphRect.origin.y + 4;
+				glyphPoint.x += glyphRect.origin.x - 0.5 * pointScale;
+				glyphPoint.y = glyphRect.origin.y + 2 * pointScale;
 				[glyph drawAtPoint:glyphPoint withAttributes:attr];
 			}
 		}
