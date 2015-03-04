@@ -32,7 +32,7 @@ typedef enum {
 
 + (NSString*)stringForHiddenGlypth:(BPHiddenGlypth)glypth
 {
-	NSString __block *CRLF, *SPACE, *TAB;
+	NSString __block *CRLF = nil, *SPACE, *TAB;
 
 	@synchronized(self)
 	{
@@ -54,11 +54,13 @@ typedef enum {
 				return TAB;
 		}
 	}
+
+    return @"";
 }
 
 + (NSFont*)cachedInvisibleGlyphFontWithSize:(CGFloat)size
 {
-	NSFont *font;
+	NSFont *font = nil;
 	CGFloat lastSize = -1.0;
 	@synchronized(self)
 	{

@@ -24,8 +24,6 @@
 
 #define kBP_KEYCODE_RETURN 36
 
-#define BP_IS_FIRST_CHAR (int)range.location - (int)diffRange
-
 @interface BPTextView ()
 
 @end
@@ -46,7 +44,7 @@
 {
 	NSUInteger count = 0, spaces = 0;
 	NSString *string = self.string;
-	unichar chr = '\0';
+	unichar chr;
 	BOOL finished = NO;
 
 	/* The current character might be a tab or a space, so we conider it in the count. */
@@ -102,7 +100,7 @@
 		NSRange range = [self rangeForUserTextChange];
 		NSString *string = self.string;
 		NSUInteger location = 0, count = 0;
-		unichar chr = '\0';
+		unichar chr;
 
 		range.location--;
 
@@ -148,7 +146,7 @@
 		NSString *substring = [text substringWithRange:currentRange];
 		NSMutableArray *lineStarts = [NSMutableArray new];
 
-		[substring enumerateSubstringsInRange:NSMakeRange(0, substring.length) options:NSStringEnumerationByLines usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+		[substring enumerateSubstringsInRange:NSMakeRange(0, substring.length) options:NSStringEnumerationByLines usingBlock:^(NSString *substr, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
 			NSUInteger lineStart = 0;
 			[text getLineStart:&lineStart end:nil contentsEnd:nil forRange:NSMakeRange(currentRange.location + substringRange.location, substringRange.length)];
 			[lineStarts addObject:@(lineStart)];
@@ -183,7 +181,7 @@
 		NSString *substring = [text substringWithRange:currentRange];
 		NSMutableArray *lineStarts = [NSMutableArray new];
 
-		[substring enumerateSubstringsInRange:NSMakeRange(0, substring.length) options:NSStringEnumerationByLines usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+		[substring enumerateSubstringsInRange:NSMakeRange(0, substring.length) options:NSStringEnumerationByLines usingBlock:^(NSString *substr, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
 			NSUInteger lineStart = 0;
 			[text getLineStart:&lineStart end:nil contentsEnd:nil forRange:NSMakeRange(currentRange.location + substringRange.location, substringRange.length)];
 			[lineStarts addObject:@(lineStart)];

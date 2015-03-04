@@ -68,11 +68,11 @@
 {
 	for (NSNumber *enc in [encodings allKeys]) {
 		if ([name isEqualToString:[encodings objectForKey:enc]]) {
-			return [enc integerValue];
+			return [enc unsignedIntegerValue];
 		}
 	}
 
-	return -1;
+	return 0;
 }
 
 

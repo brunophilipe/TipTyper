@@ -20,7 +20,6 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #import "BPDocument.h"
-#import "BPApplication.h"
 #import "BPEncodingTool.h"
 
 @interface BPDocument ()
@@ -136,7 +135,7 @@
 - (NSString*)reloadWithDifferentEncoding
 {
 	if (self.isLoadedFromFile || self.fileURL) {
-		NSInteger result;
+		NSInteger result = 1;
 		NSString *curEncodingName = [[BPEncodingTool sharedTool] nameForEncoding:_encoding];
 		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"BP_MESSAGE_PICKENCODING", nil) defaultButton:NSLocalizedString(@"BP_GENERIC_OK", nil) alternateButton:NSLocalizedString(@"BP_GENERIC_CANCEL", nil) otherButton:nil informativeTextWithFormat:NSLocalizedString(@"BP_MESSAGE_ENCODING", nil)];
 
@@ -151,28 +150,34 @@
 
 		[alert setAccessoryView:selector];
 
-		while ((result = [alert runModal]) == 1)
+		do
 		{
-			NSUInteger encoding = [[BPEncodingTool sharedTool] encodingForEncodingName:selector.selectedItem.title];
-			NSString *inputString = nil;
-			NSError *error;
+            result = [alert runModal];
 
-			inputString = [[NSString alloc] initWithContentsOfURL:self.fileURL encoding:encoding error:&error];
+			if (result == 1)
+            {
+                NSUInteger encoding = [[BPEncodingTool sharedTool] encodingForEncodingName:selector.selectedItem.title];
+                NSString *inputString = nil;
+                NSError *error;
 
-			if (error) {
-				NSAlert *alert = [NSAlert alertWithError:error];
-				[alert runModal];
-			}
+                inputString = [[NSString alloc] initWithContentsOfURL:self.fileURL encoding:encoding error:&error];
 
-			if (inputString) {
-				//Change the local encoding to the selected
-				_encoding = encoding;
+                if (error) {
+                    alert = [NSAlert alertWithError:error];
+                    [alert runModal];
+                }
+
+                if (inputString) {
+                    //Change the local encoding to the selected
+                    _encoding = encoding;
 
 //				[self.displayWindow.textView setString:inputString];
-				[[self.displayWindow.infoView viewWithTag:4] setStringValue:selector.selectedItem.title];
-				return inputString;
-			}
+                    [[self.displayWindow.infoView viewWithTag:4] setStringValue:selector.selectedItem.title];
+                    return inputString;
+                }
+            }
 		}
+        while (result == 1);
 	} else {
 		NSAlert *failedAlert = [NSAlert alertWithMessageText:NSLocalizedString(@"BP_ERROR_ENCODING_NOFILE", nil) defaultButton:NSLocalizedString(@"BP_GENERIC_OK", nil) alternateButton:NSLocalizedString(@"BP_GENERIC_CANCEL", nil) otherButton:nil informativeTextWithFormat:@""];
 		[failedAlert runModal];

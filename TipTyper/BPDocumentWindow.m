@@ -22,13 +22,7 @@
 #import "BPDocumentWindow.h"
 #import "Libraries/LineCounter/MarkerLineNumberView.h"
 #import "Classes/NSString+WordsCount.h"
-#import "BPApplication.h"
 #import "NSColor+Luminance.h"
-
-typedef enum {
-	kBP_EDITORSPACING_WIDE = 1,
-	kBP_EDITORSPACING_MARGIN = 2
-} kBP_EDITORSPACING;
 
 @interface BPDocumentWindow ()
 
@@ -161,7 +155,7 @@ typedef enum {
 		paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
 	}
 
-	float charWidth = [[self.textView.font screenFontWithRenderingMode:NSFontAntialiasedRenderingMode] advancementForGlyph:(NSGlyph) ' '].width;
+	CGFloat charWidth = [[self.textView.font screenFontWithRenderingMode:NSFontAntialiasedRenderingMode] advancementForGlyph:(NSGlyph) ' '].width;
 	[paragraphStyle setDefaultTabInterval:(charWidth * spaces)];
 	[paragraphStyle setTabStops:[NSArray array]];
 
@@ -276,8 +270,8 @@ typedef enum {
 	}
 
 	if ((aux = [defaults objectForKey:kBPDefaultTabSize])) {
-		[self.textView setTabSize:[aux integerValue]];
-		[self setTabWidthToNumberOfSpaces:[aux integerValue]];
+		[self.textView setTabSize:[aux unsignedIntegerValue]];
+		[self setTabWidthToNumberOfSpaces:[aux unsignedIntegerValue]];
 	} else {
 		[self.textView setTabSize:4];
 		[self setTabWidthToNumberOfSpaces:4];
@@ -330,25 +324,22 @@ typedef enum {
 
 - (void)updateEditorWidthToNarrow:(BOOL)narrow
 {
-	switch (narrow) {
-		case NO: //Should become wide
-			[self.constraint_scrollViewLeftSpace setPriority:NSLayoutPriorityDefaultHigh];
-			[self.constraint_scrollViewRightSpace setPriority:NSLayoutPriorityDefaultHigh];
-			[self.constraint_scrollViewWidth setPriority:NSLayoutPriorityDefaultLow];
-			break;
-
-		case YES: //Should become narrow
-		{
-			CGFloat width = [[NSUserDefaults standardUserDefaults] floatForKey:kBPDefaultEditorWidth];
-			if (width < 400) width = 450.f;
-			[self.constraint_scrollViewWidth setConstant:width];
-			[self.constraint_scrollViewLeftSpace setPriority:NSLayoutPriorityDefaultLow];
-			[self.constraint_scrollViewRightSpace setPriority:NSLayoutPriorityDefaultLow];
-			[self.constraint_scrollViewWidth setPriority:NSLayoutPriorityDefaultHigh];
-			[self setLinesCounterVisible:NO];
-		}
-			break;
-	}
+    if (narrow)
+    {
+        [self.constraint_scrollViewLeftSpace setPriority:NSLayoutPriorityDefaultHigh];
+        [self.constraint_scrollViewRightSpace setPriority:NSLayoutPriorityDefaultHigh];
+        [self.constraint_scrollViewWidth setPriority:NSLayoutPriorityDefaultLow];
+    }
+    else
+    {
+        CGFloat width = [[NSUserDefaults standardUserDefaults] floatForKey:kBPDefaultEditorWidth];
+        if (width < 400) width = 450.f;
+        [self.constraint_scrollViewWidth setConstant:width];
+        [self.constraint_scrollViewLeftSpace setPriority:NSLayoutPriorityDefaultLow];
+        [self.constraint_scrollViewRightSpace setPriority:NSLayoutPriorityDefaultLow];
+        [self.constraint_scrollViewWidth setPriority:NSLayoutPriorityDefaultHigh];
+        [self setLinesCounterVisible:NO];
+    }
 }
 
 - (BOOL)isEditorSetToNarrow
@@ -430,9 +421,9 @@ typedef enum {
 	[alert setAccessoryView:field];
 	[alert setAlertStyle:NSInformationalAlertStyle];
 	
-	void (^completion)(NSModalResponse returnCode) = ^(NSModalResponse returnCode) {
+	void (^completion)(NSInteger returnCode) = ^(NSInteger returnCode) {
 		if (returnCode == 1) {
-			[self goToLine:MAX(1, field.integerValue)];
+			[self goToLine:MAX(1, (NSUInteger)field.integerValue)];
 		}
 	};
 	
@@ -442,8 +433,7 @@ typedef enum {
 	}
 	else
 	{
-		NSModalResponse returnCode = [alert runModal];
-		completion(returnCode);
+		completion([alert runModal]);
 	}
 }
 

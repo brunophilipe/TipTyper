@@ -20,7 +20,6 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #import "BPPreferencesWindowController.h"
-#import "BPApplication.h"
 
 typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
     BP_DEFAULTS_FONT         = (1<<1),
@@ -34,6 +33,7 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
     BP_DEFAULTS_COUNTSPACES  = (1<<9),
     BP_DEFAULTS_EDITORWIDTH  = (1<<10),
 	BP_DEFAULTS_SHOWSPECIALS = (1<<11),
+    BP_DEFAULTS_NONE         = 0
 };
 
 @interface BPPreferencesWindowController ()
@@ -178,7 +178,7 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 
 	[defaults synchronize];
 
-	self.changedAttributes = 0;
+	self.changedAttributes = BP_DEFAULTS_NONE;
 
 	[self configurePreferencesWindow];
 
@@ -238,6 +238,9 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 		case -10: //Count spaces as chars
 			self.changedAttributes |= BP_DEFAULTS_SHOWSPECIALS;
 			break;
+
+        default:
+            break;
 	}
 }
 
@@ -278,7 +281,7 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_showInvisibles state] == NSOnState)] forKey:kBPDefaultShowSpecials];
 	}
 
-	self.changedAttributes = 0;
+	self.changedAttributes = BP_DEFAULTS_NONE;
 
 	[defaults synchronize];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBPShouldReloadStyleNotification object:self];

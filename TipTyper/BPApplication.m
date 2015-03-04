@@ -20,7 +20,6 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #import "BPApplication.h"
-#import "BPDocumentWindow.h"
 #import "DCOAboutWindowController.h"
 #import "BPPreferencesWindowController.h"
 
@@ -73,6 +72,7 @@ NSString *const kBPTipTyperWebsite = @"http://www.brunophilipe.com/software/tipt
 	if (!aboutWindowController) {
 		aboutWindowController = [[DCOAboutWindowController alloc] init];
 
+        //TODO: Support for Lion
 		NSTimeInterval buildDate = [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BuildDate"] doubleValue];
 		NSInteger currentYear = [[NSCalendar currentCalendar] component:NSCalendarUnitYear fromDate:[NSDate dateWithTimeIntervalSince1970:buildDate]];
 		

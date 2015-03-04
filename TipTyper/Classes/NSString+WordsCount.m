@@ -40,7 +40,7 @@
 	NSUInteger __block count = 0;
 
 	[self enumerateSubstringsInRange:NSMakeRange(0, self.length) options:NSStringEnumerationByComposedCharacterSequences usingBlock:^(NSString *substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
-		if (![separators characterIsMember:[substring UTF8String][0]])
+		if (![separators characterIsMember:(unsigned char const)([substring UTF8String][0])])
 			count++;
 	}];
 
