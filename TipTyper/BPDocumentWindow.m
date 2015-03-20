@@ -464,7 +464,7 @@
 	[self loadTabSettingsFromDefaults];
 }
 
-- (IBAction)action_menu_changeFontSize:(id)sender
+- (IBAction)updateFontSizeWithTaggedSender:(id)sender
 {
 	NSMenuItem *item = sender;
 	static NSControl *dummy;

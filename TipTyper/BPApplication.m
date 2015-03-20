@@ -74,7 +74,8 @@ NSString *const kBPTipTyperWebsite = @"http://www.brunophilipe.com/software/tipt
 
         //TODO: Support for Lion
 		NSTimeInterval buildDate = [[[NSBundle mainBundle] objectForInfoDictionaryKey:@"BuildDate"] doubleValue];
-		NSInteger currentYear = [[NSCalendar currentCalendar] component:NSCalendarUnitYear fromDate:[NSDate dateWithTimeIntervalSince1970:buildDate]];
+		NSInteger currentYear = [[NSCalendar currentCalendar] component:NSCalendarUnitYear
+															   fromDate:[NSDate dateWithTimeIntervalSince1970:buildDate]];
 		
 		[aboutWindowController setAppCopyright:[NSString stringWithFormat:@"Copyright Bruno Philipe 2013-%ld – All Rights Reserved", currentYear]];
 		[aboutWindowController setAppWebsiteURL:[NSURL URLWithString:kBPTipTyperWebsite]];

@@ -147,7 +147,7 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 	self.currentFont = font;
 
 	[self.field_currentFont setFont:[NSFont fontWithName:self.currentFont.fontName size:12]];
-	[self.field_currentFont setStringValue:[NSString stringWithFormat:@"%@ %.0fpt",self.currentFont.displayName,self.currentFont.pointSize]];
+	[self.field_currentFont setStringValue:[NSString stringWithFormat:@"%@ %.0fpt", self.currentFont.displayName, self.currentFont.pointSize]];
 
 	[self.textView_example setFont:self.currentFont];
 }
@@ -212,11 +212,8 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 			break;
 
 		case -6: //Tab size stepper
-		{
-			NSStepper *tabSize = sender;
-			[self.field_tabSize setIntegerValue:tabSize.integerValue];
+			[self.field_tabSize setIntegerValue:[sender integerValue]];
 			self.changedAttributes |= BP_DEFAULTS_TABSIZE;
-		}
 			break;
 
 		case -7: //Insert spaces
@@ -228,11 +225,8 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 			break;
 
 		case -9: //Fixed editor width stepper
-		{
-			NSStepper *editorSize = sender;
-			[self.field_editorSize setIntegerValue:editorSize.integerValue];
+			[self.field_editorSize setIntegerValue:[sender integerValue]];
 			self.changedAttributes |= BP_DEFAULTS_EDITORWIDTH;
-		}
 			break;
 
 		case -10: //Count spaces as chars
@@ -248,37 +242,48 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	if (self.changedAttributes & BP_DEFAULTS_FONT) {
-		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.currentFont] forKey:kBPDefaultFont];
+		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.currentFont]
+					 forKey:kBPDefaultFont];
 	}
 	if (self.changedAttributes & BP_DEFAULTS_BGCOLOR) {
-		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.color_bg] forKey:kBPDefaultBGCOLOR];
+		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.color_bg]
+					 forKey:kBPDefaultBGCOLOR];
 	}
 	if (self.changedAttributes & BP_DEFAULTS_TXTCOLOR) {
-		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.color_text] forKey:kBPDefaultTextColor];
+		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.color_text]
+					 forKey:kBPDefaultTextColor];
 	}
 	if (self.changedAttributes & BP_DEFAULTS_SHOWLINES) {
-		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_showLines state] == NSOnState)] forKey:kBPDefaultShowLines];
+		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_showLines state] == NSOnState)]
+					 forKey:kBPDefaultShowLines];
 	}
 	if (self.changedAttributes & BP_DEFAULTS_SHOWSTATUS) {
-		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_showStatus state] == NSOnState)] forKey:kBPDefaultShowStatus];
+		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_showStatus state] == NSOnState)]
+					 forKey:kBPDefaultShowStatus];
 	}
 	if (self.changedAttributes & BP_DEFAULTS_INSERTTABS) {
-		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_insertTabs state] == NSOnState)] forKey:kBPDefaultInsertTabs];
+		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_insertTabs state] == NSOnState)]
+					 forKey:kBPDefaultInsertTabs];
 	}
 	if (self.changedAttributes & BP_DEFAULTS_INSERTSPACES) {
-		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_insertSpaces state] == NSOnState)] forKey:kBPDefaultInsertSpaces];
+		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_insertSpaces state] == NSOnState)]
+					 forKey:kBPDefaultInsertSpaces];
 	}
 	if (self.changedAttributes & BP_DEFAULTS_COUNTSPACES) {
-		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_countSpaces state] == NSOnState)] forKey:kBPDefaultCountSpaces];
+		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_countSpaces state] == NSOnState)]
+					 forKey:kBPDefaultCountSpaces];
 	}
 	if (self.changedAttributes & BP_DEFAULTS_TABSIZE) {
-		[defaults setObject:[NSNumber numberWithInteger:[self.field_tabSize integerValue]] forKey:kBPDefaultTabSize];
+		[defaults setObject:[NSNumber numberWithInteger:[self.field_tabSize integerValue]]
+					 forKey:kBPDefaultTabSize];
 	}
 	if (self.changedAttributes & BP_DEFAULTS_EDITORWIDTH) {
-		[defaults setObject:[NSNumber numberWithInteger:[self.field_editorSize integerValue]] forKey:kBPDefaultEditorWidth];
+		[defaults setObject:[NSNumber numberWithInteger:[self.field_editorSize integerValue]]
+					 forKey:kBPDefaultEditorWidth];
 	}
 	if (self.changedAttributes & BP_DEFAULTS_SHOWSPECIALS) {
-		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_showInvisibles state] == NSOnState)] forKey:kBPDefaultShowSpecials];
+		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_showInvisibles state] == NSOnState)]
+					 forKey:kBPDefaultShowSpecials];
 	}
 
 	self.changedAttributes = BP_DEFAULTS_NONE;
@@ -296,7 +301,6 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 	{
 		[self.popover performClose:sender];
 	}
-
 }
 
 @end

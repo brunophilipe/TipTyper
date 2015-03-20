@@ -42,7 +42,7 @@
 - (BOOL)isDisplayingInfo;
 - (BOOL)isDisplayingInvisibles;
 
-- (void)action_menu_changeFontSize:(id)sender;
+- (void)updateFontSizeWithTaggedSender:(id)sender;
 
 - (void)increaseIndentation:(id)sender;
 - (void)decreaseIndentation:(id)sender;

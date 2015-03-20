@@ -48,19 +48,16 @@
 
 - (NSString *)windowNibName
 {
-	// Override returning the nib file name of the document
-	// If you need to use a subclass of NSWindowController or if your document supports multiple NSWindowControllers, you should remove this method and override -makeWindowControllers instead.
 	return @"BPDocument";
 }
 
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
 	[super windowControllerDidLoadNib:aController];
-	// Add any code here that needs to be executed once the windowController has loaded the document's window.
+
 	[self setDisplayWindow:(BPDocumentWindow*)aController.window];
 	[self.displayWindow construct];
 	[self.displayWindow setDocument:self];
-
 	[self.displayWindow updateTextViewContents];
 }
 
@@ -97,8 +94,15 @@
 	{
 		NSError *error;
 
-		if ([[[[NSFileManager defaultManager] attributesOfItemAtPath:[url relativePath] error:&error] objectForKey:NSFileSize] unsignedIntegerValue] > 500 * 1000000) { //Filesize > 500MB
-			NSAlert *alert = [NSAlert alertWithMessageText:@"Error" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"TipTyper doesn't support files greater than 500MB. This is a work in progress."];
+		NSNumber *fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:[url relativePath]
+																			   error:&error] objectForKey:NSFileSize];
+		
+		if ([fileSize unsignedIntegerValue] > 500 * 1000000) { //Filesize > 500MB
+			NSAlert *alert = [NSAlert alertWithMessageText:@"Error"
+											 defaultButton:@"OK"
+										   alternateButton:nil
+											   otherButton:nil
+								 informativeTextWithFormat:@"TipTyper doesn't support files greater than 500MB. This is a work in progress."];
 			[alert runModal];
 		}
 
@@ -137,18 +141,23 @@
 	if (self.isLoadedFromFile || self.fileURL) {
 		NSInteger result = 1;
 		NSString *curEncodingName = [[BPEncodingTool sharedTool] nameForEncoding:_encoding];
-		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"BP_MESSAGE_PICKENCODING", nil) defaultButton:NSLocalizedString(@"BP_GENERIC_OK", nil) alternateButton:NSLocalizedString(@"BP_GENERIC_CANCEL", nil) otherButton:nil informativeTextWithFormat:NSLocalizedString(@"BP_MESSAGE_ENCODING", nil)];
+		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"BP_MESSAGE_PICKENCODING", nil)
+										 defaultButton:NSLocalizedString(@"BP_GENERIC_OK", nil)
+									   alternateButton:NSLocalizedString(@"BP_GENERIC_CANCEL", nil)
+										   otherButton:nil
+							 informativeTextWithFormat:NSLocalizedString(@"BP_MESSAGE_ENCODING", nil)];
 
 		[alert.window setTitle:(self.loadedSuccessfully ? NSLocalizedString(@"BP_MESSAGE_REOPENING", nil) : NSLocalizedString(@"BP_MESSAGE_AUTOENCODING", nil))];
 
-		NSPopUpButton __strong *selector = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(0, 0, 160, 40) pullsDown:YES];
-		[selector addItemsWithTitles:[[BPEncodingTool sharedTool] getAllEncodings]];
-		[selector selectItemWithTitle:curEncodingName];
-		[selector setTitle:curEncodingName];
-		[selector setTarget:self];
-		[selector setAction:@selector(menuEncodingChanged:)];
+		NSPopUpButton __strong *button = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(0, 0, 160, 40) pullsDown:YES];
+		
+		[button addItemsWithTitles:[[BPEncodingTool sharedTool] getAllEncodings]];
+		[button selectItemWithTitle:curEncodingName];
+		[button setTitle:curEncodingName];
+		[button setTarget:self];
+		[button setAction:@selector(menuEncodingChanged:)];
 
-		[alert setAccessoryView:selector];
+		[alert setAccessoryView:button];
 
 		do
 		{
@@ -156,7 +165,7 @@
 
 			if (result == 1)
             {
-                NSUInteger encoding = [[BPEncodingTool sharedTool] encodingForEncodingName:selector.selectedItem.title];
+                NSUInteger encoding = [[BPEncodingTool sharedTool] encodingForEncodingName:button.selectedItem.title];
                 NSString *inputString = nil;
                 NSError *error;
 
@@ -172,15 +181,18 @@
                     _encoding = encoding;
 
 //				[self.displayWindow.textView setString:inputString];
-                    [[self.displayWindow.infoView viewWithTag:4] setStringValue:selector.selectedItem.title];
+                    [[self.displayWindow.infoView viewWithTag:4] setStringValue:button.selectedItem.title];
                     return inputString;
                 }
             }
 		}
         while (result == 1);
 	} else {
-		NSAlert *failedAlert = [NSAlert alertWithMessageText:NSLocalizedString(@"BP_ERROR_ENCODING_NOFILE", nil) defaultButton:NSLocalizedString(@"BP_GENERIC_OK", nil) alternateButton:NSLocalizedString(@"BP_GENERIC_CANCEL", nil) otherButton:nil informativeTextWithFormat:@""];
-		[failedAlert runModal];
+		[[NSAlert alertWithMessageText:NSLocalizedString(@"BP_ERROR_ENCODING_NOFILE", nil)
+						 defaultButton:NSLocalizedString(@"BP_GENERIC_OK", nil)
+					   alternateButton:NSLocalizedString(@"BP_GENERIC_CANCEL", nil)
+						   otherButton:nil
+			 informativeTextWithFormat:@""] runModal];
 	}
 
 	return nil;
@@ -221,7 +233,8 @@
 {
 	NSString *string = [self reloadWithDifferentEncoding];
 
-	if (string) {
+	if (string)
+	{
 		[self setFileString:string];
 		[self.displayWindow updateTextViewContents];
 	}
