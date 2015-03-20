@@ -421,7 +421,6 @@
         range.length++;
         
         count = (unsigned)[lines count];
-        index = 0;
         
         for (line = [self lineNumberForCharacterIndex:(unsigned)range.location inText:text]; line < count; line++)
         {

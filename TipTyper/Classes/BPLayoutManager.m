@@ -61,7 +61,7 @@ typedef enum {
 + (NSFont*)cachedInvisibleGlyphFontWithSize:(CGFloat)size
 {
 	NSFont *font = nil;
-	CGFloat lastSize = -1.0;
+	static CGFloat lastSize = -1.0;
 	@synchronized(self)
 	{
 		if (!font || lastSize != size) {
