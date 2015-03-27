@@ -25,8 +25,10 @@
 
 + (BPEncodingTool *)sharedTool;
 
-- (NSString *)nameForEncoding:(NSInteger)encoding;
+- (NSString *)nameForEncoding:(NSStringEncoding)encoding;
 - (NSArray *)getAllEncodings;
-- (NSUInteger)encodingForEncodingName:(NSString *)name;
+- (NSStringEncoding)encodingForEncodingName:(NSString *)name;
+
++ (NSString*)loadStringWithPathAskingForEncoding:(NSURL*)fileURL usedEncoding:(NSStringEncoding*)usedEncoding;
 
 @end

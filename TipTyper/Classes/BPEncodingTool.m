@@ -38,13 +38,13 @@
 {
 	self = [super init];
 	
-	NSInteger rawEncodings[] = {NSUTF8StringEncoding,NSASCIIStringEncoding,NSISOLatin1StringEncoding,NSISOLatin2StringEncoding,NSMacOSRomanStringEncoding,NSWindowsCP1251StringEncoding,NSWindowsCP1252StringEncoding,NSWindowsCP1253StringEncoding,NSWindowsCP1254StringEncoding,NSWindowsCP1250StringEncoding,NSUTF16StringEncoding,NSUTF16BigEndianStringEncoding,NSUTF16LittleEndianStringEncoding,NSUTF32StringEncoding,NSUTF32BigEndianStringEncoding,NSUTF32LittleEndianStringEncoding,NSNEXTSTEPStringEncoding,NSSymbolStringEncoding,NSISO2022JPStringEncoding,NSJapaneseEUCStringEncoding,NSNonLossyASCIIStringEncoding,NSShiftJISStringEncoding};
+	NSStringEncoding rawEncodings[] = {NSUTF8StringEncoding,NSASCIIStringEncoding,NSISOLatin1StringEncoding,NSISOLatin2StringEncoding,NSMacOSRomanStringEncoding,NSWindowsCP1251StringEncoding,NSWindowsCP1252StringEncoding,NSWindowsCP1253StringEncoding,NSWindowsCP1254StringEncoding,NSWindowsCP1250StringEncoding,NSUTF16StringEncoding,NSUTF16BigEndianStringEncoding,NSUTF16LittleEndianStringEncoding,NSUTF32StringEncoding,NSUTF32BigEndianStringEncoding,NSUTF32LittleEndianStringEncoding,NSNEXTSTEPStringEncoding,NSSymbolStringEncoding,NSISO2022JPStringEncoding,NSJapaneseEUCStringEncoding,NSNonLossyASCIIStringEncoding,NSShiftJISStringEncoding};
 	NSString *rawNames[] = {@"UTF-8",@"ASCII",@"ISO Latin-1",@"ISO Latin-2",@"Mac OS Roman",@"Windows-1251",@"Windows-1252",@"Windows-1253",@"Windows-1254",@"Windows-1250",@"UTF-16",@"UTF-16 BE",@"UTF-16 LE",@"UTF-32",@"UTF-32 BE",@"UTF-32 LE",@"NeXT",@"Symbol",@"ISO-2022 JP",@"Japanese EUC",@"Lossy ASCII",@"Shift JIS"};
 
 	NSMutableDictionary *dEncodings = [[NSMutableDictionary alloc] initWithCapacity:22];
 
-	for (NSInteger i=0; i<22; i++) {
-		[dEncodings setObject:rawNames[i] forKey:[NSNumber numberWithInteger:rawEncodings[i]]];
+	for (short i=0; i<22; i++) {
+		[dEncodings setObject:rawNames[i] forKey:[NSNumber numberWithUnsignedInteger:rawEncodings[i]]];
 	}
 
 	encodings = [dEncodings copy];
@@ -52,7 +52,7 @@
 	return self;
 }
 
-- (NSString *)nameForEncoding:(NSInteger)encoding
+- (NSString *)nameForEncoding:(NSStringEncoding)encoding
 {
 	return [encodings objectForKey:[NSNumber numberWithInteger:encoding]];
 }
@@ -64,7 +64,7 @@
 	return encs;
 }
 
-- (NSUInteger)encodingForEncodingName:(NSString *)name
+- (NSStringEncoding)encodingForEncodingName:(NSString *)name
 {
 	for (NSNumber *enc in [encodings allKeys]) {
 		if ([name isEqualToString:[encodings objectForKey:enc]]) {
@@ -75,5 +75,79 @@
 	return 0;
 }
 
++ (NSString*)loadStringWithPathAskingForEncoding:(NSURL*)fileURL usedEncoding:(NSStringEncoding*)usedEncoding
+{
+	if (fileURL)
+	{
+		NSInteger result = 1;
+		
+		NSString *curEncodingName = [[BPEncodingTool sharedTool] nameForEncoding:NSUTF8StringEncoding];
+		
+		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"BP_MESSAGE_PICKENCODING", nil)
+										 defaultButton:NSLocalizedString(@"BP_GENERIC_OK", nil)
+									   alternateButton:NSLocalizedString(@"BP_GENERIC_CANCEL", nil)
+										   otherButton:nil
+							 informativeTextWithFormat:NSLocalizedString(@"BP_MESSAGE_ENCODING", nil)];
+		
+		[alert.window setTitle:NSLocalizedString(@"BP_MESSAGE_AUTOENCODING", nil)];
+		
+		NSPopUpButton __strong *button = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(0, 0, 160, 40) pullsDown:YES];
+		
+		[button addItemsWithTitles:[[BPEncodingTool sharedTool] getAllEncodings]];
+		[button selectItemWithTitle:curEncodingName];
+		[button setTitle:curEncodingName];
+		[button setTarget:self];
+		[button setAction:@selector(menuEncodingChanged:)];
+		
+		[alert setAccessoryView:button];
+		
+		do
+		{
+			result = [alert runModal];
+			
+			if (result == 1)
+			{
+				NSStringEncoding encoding = [[BPEncodingTool sharedTool] encodingForEncodingName:button.selectedItem.title];
+				NSString *inputString = nil;
+				NSError *error;
+				
+				inputString = [[NSString alloc] initWithContentsOfURL:fileURL encoding:encoding error:&error];
+				
+				if (error)
+				{
+					NSAlert *errorAlert = [NSAlert alertWithError:error];
+					[errorAlert runModal];
+				}
+				
+				if (inputString)
+				{
+					if (usedEncoding != NULL)
+					{
+						*usedEncoding = encoding;
+					}
+					
+					return inputString;
+				}
+			}
+		}
+		while (result == 1);
+	}
+	else
+	{
+		[[NSAlert alertWithMessageText:NSLocalizedString(@"BP_ERROR_ENCODING_NOFILE", nil)
+						 defaultButton:NSLocalizedString(@"BP_GENERIC_OK", nil)
+					   alternateButton:NSLocalizedString(@"BP_GENERIC_CANCEL", nil)
+						   otherButton:nil
+			 informativeTextWithFormat:@""] runModal];
+	}
+	
+	return nil;
+}
+
+- (void)menuEncodingChanged:(id)sender
+{
+	NSPopUpButton *button = sender;
+	[button setTitle:[button selectedItem].title];
+}
 
 @end

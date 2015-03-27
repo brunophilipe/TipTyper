@@ -75,10 +75,14 @@
 		[self setFileString:string];
 		[self.displayWindow updateTextViewContents];
 	} else {
-		string = [self reloadURLWithDifferentEncoding:url];
+		usedEncoding = 0;
 		
-		if (string)
+		string = [BPEncodingTool loadStringWithPathAskingForEncoding:url usedEncoding:&usedEncoding];
+		
+		if (string && usedEncoding > 0)
 		{
+			_encoding = usedEncoding;
+			
 			[self setFileString:string];
 			[self.displayWindow updateTextViewContents];
 		}
@@ -96,8 +100,7 @@
 {
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[url relativePath]])
 	{
-		NSError *error;
-
+		NSError *error = nil;
 		NSNumber *fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:[url relativePath]
 																			   error:&error] objectForKey:NSFileSize];
 		
@@ -137,67 +140,6 @@
 - (void)canCloseDocumentWithDelegate:(id)delegate shouldCloseSelector:(SEL)shouldCloseSelector contextInfo:(void *)contextInfo
 {
 	[super canCloseDocumentWithDelegate:delegate shouldCloseSelector:shouldCloseSelector contextInfo:contextInfo];
-}
-
-- (NSString*)reloadURLWithDifferentEncoding:(NSURL*)fileURL
-{
-	if (fileURL) {
-		NSInteger result = 1;
-		
-		NSString *curEncodingName = [[BPEncodingTool sharedTool] nameForEncoding:_encoding];
-		
-		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"BP_MESSAGE_PICKENCODING", nil)
-										 defaultButton:NSLocalizedString(@"BP_GENERIC_OK", nil)
-									   alternateButton:NSLocalizedString(@"BP_GENERIC_CANCEL", nil)
-										   otherButton:nil
-							 informativeTextWithFormat:NSLocalizedString(@"BP_MESSAGE_ENCODING", nil)];
-
-		[alert.window setTitle:(self.loadedSuccessfully ? NSLocalizedString(@"BP_MESSAGE_REOPENING", nil) : NSLocalizedString(@"BP_MESSAGE_AUTOENCODING", nil))];
-
-		NSPopUpButton __strong *button = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(0, 0, 160, 40) pullsDown:YES];
-		
-		[button addItemsWithTitles:[[BPEncodingTool sharedTool] getAllEncodings]];
-		[button selectItemWithTitle:curEncodingName];
-		[button setTitle:curEncodingName];
-		[button setTarget:self];
-		[button setAction:@selector(menuEncodingChanged:)];
-
-		[alert setAccessoryView:button];
-
-		do
-		{
-            result = [alert runModal];
-
-			if (result == 1)
-            {
-                NSUInteger encoding = [[BPEncodingTool sharedTool] encodingForEncodingName:button.selectedItem.title];
-                NSString *inputString = nil;
-                NSError *error;
-
-                inputString = [[NSString alloc] initWithContentsOfURL:self.fileURL encoding:encoding error:&error];
-
-                if (error) {
-                    NSAlert *errorAlert = [NSAlert alertWithError:error];
-                    [errorAlert runModal];
-                }
-
-                if (inputString) {
-                    //Change the local encoding to the selected
-                    _encoding = encoding;
-                    return inputString;
-                }
-            }
-		}
-        while (result == 1);
-	} else {
-		[[NSAlert alertWithMessageText:NSLocalizedString(@"BP_ERROR_ENCODING_NOFILE", nil)
-						 defaultButton:NSLocalizedString(@"BP_GENERIC_OK", nil)
-					   alternateButton:NSLocalizedString(@"BP_GENERIC_CANCEL", nil)
-						   otherButton:nil
-			 informativeTextWithFormat:@""] runModal];
-	}
-
-	return nil;
 }
 
 #pragma mark - Save Panel
@@ -242,12 +184,6 @@
 	}
 }
  */
-
-- (void)menuEncodingChanged:(id)sender
-{
-	NSPopUpButton *button = sender;
-	[button setTitle:[button selectedItem].title];
-}
 
 - (void)toggleLinesCounter:(id)sender
 {
