@@ -49,8 +49,7 @@ NSString *const kBPTipTyperWebsite = @"http://www.brunophilipe.com/software/tipt
 
 - (IBAction)openWebsite:(id)sender
 {
-	NSWorkspace *ws = [NSWorkspace sharedWorkspace];
-	[ws openURL:[NSURL URLWithString:kBPTipTyperWebsite]];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:kBPTipTyperWebsite]];
 }
 
 - (IBAction)showPreferences:(id)sender
