@@ -47,6 +47,13 @@ NSString *const kBPTipTyperWebsite = @"http://www.brunophilipe.com/software/tipt
 	NSWindow *prefWindow;
 }
 
+- (BOOL)hasKeyDocument
+{
+	id window = [self keyWindow];
+	
+	return window && [window isKindOfClass:[BPDocumentWindow class]] && [window document];
+}
+
 - (IBAction)openWebsite:(id)sender
 {
 	NSWorkspace *ws = [NSWorkspace sharedWorkspace];

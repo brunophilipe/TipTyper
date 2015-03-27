@@ -35,11 +35,8 @@
 - (id)init
 {
     self = [super init];
-    if (self) {
-		// Add your subclass-specific initialization here.
-		[(BPApplication*)[NSApplication sharedApplication] setKeyDocument_isLinkedToFile:NO];
-		[(BPApplication*)[NSApplication sharedApplication] setHasKeyDocument:YES];
-
+    if (self)
+	{
 		self.fileString = @"";
 		self.encoding = NSUTF8StringEncoding;
     }
@@ -119,7 +116,8 @@
 	return NO;
 }
 
-- (NSPrintOperation *)printOperationWithSettings:(NSDictionary *)printSettings error:(NSError **)outError {
+- (NSPrintOperation *)printOperationWithSettings:(NSDictionary *)printSettings error:(NSError **)outError
+{
 	NSPrintInfo *prtInfo = [self printInfo];
 
 	[prtInfo setVerticallyCentered:NO];
@@ -131,8 +129,6 @@
 
 - (void)canCloseDocumentWithDelegate:(id)delegate shouldCloseSelector:(SEL)shouldCloseSelector contextInfo:(void *)contextInfo
 {
-	[(BPApplication*)[NSApplication sharedApplication] setKeyDocument_isLinkedToFile:NO];
-	[(BPApplication*)[NSApplication sharedApplication] setHasKeyDocument:NO];
 	[super canCloseDocumentWithDelegate:delegate shouldCloseSelector:shouldCloseSelector contextInfo:contextInfo];
 }
 
