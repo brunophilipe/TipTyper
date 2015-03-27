@@ -269,14 +269,14 @@
                             <action selector="printDocument:" target="-1" id="qmP-4y-JyH"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="123F0638-AFF4-4632-9AE5-44CB6B653B43" explicitItemIdentifier="BPToolbarSettingsToolbarItem" label="Settings" paletteLabel="Settings" image="NSActionTemplate" id="azi-cE-2q8">
+                    <toolbarItem implicitItemIdentifier="123F0638-AFF4-4632-9AE5-44CB6B653B43" explicitItemIdentifier="BPToolbarSettingsToolbarItem" label="Settings" paletteLabel="Settings" image="gearTemplate" id="azi-cE-2q8">
                         <nil key="toolTip"/>
                         <size key="minSize" width="29" height="28"/>
                         <size key="maxSize" width="29" height="28"/>
                         <button key="view" verticalHuggingPriority="750" id="XqQ-Sr-aTE">
                             <rect key="frame" x="11" y="14" width="29" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSActionTemplate" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="ch2-NQ-w11">
+                            <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="gearTemplate" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="ch2-NQ-w11">
                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                 <font key="font" metaFont="system"/>
                             </buttonCell>
@@ -359,7 +359,6 @@
         </window>
     </objects>
     <resources>
-        <image name="NSActionTemplate" width="14" height="14"/>
         <image name="alignCenterTemplate" width="16" height="16"/>
         <image name="alignLeftTemplate" width="16" height="16"/>
         <image name="alignRightTemplate" width="16" height="16"/>
@@ -367,6 +366,7 @@
         <image name="fontMinusTemplate" width="16" height="16"/>
         <image name="fontNormalTemplate" width="16" height="16"/>
         <image name="fontPlusTemplate" width="16" height="16"/>
+        <image name="gearTemplate" width="16" height="16"/>
         <image name="indentDecreaseTemplate" width="16" height="16"/>
         <image name="indentIncreaseTemplate" width="16" height="16"/>
         <image name="infoTemplate" width="16" height="16"/>
