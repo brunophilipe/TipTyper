@@ -124,8 +124,10 @@ typedef enum {
 			{
 				glyphPoint = [self locationForGlyphAtIndex:i];
 				glyphRect = [self lineFragmentRectForGlyphAtIndex:i effectiveRange:NULL];
+				
 				glyphPoint.x += glyphRect.origin.x - 0.5 * pointScale;
-				glyphPoint.y = glyphRect.origin.y + 2 * pointScale;
+				glyphPoint.y  = glyphRect.origin.y + 4.0 * pointScale + (userFontSize - 12.0) * 0.5;
+				
 				[glyph drawAtPoint:glyphPoint withAttributes:attr];
 			}
 		}
