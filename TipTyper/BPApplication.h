@@ -42,8 +42,6 @@ extern NSString *const kBPTipTyperWebsite;
 
 @interface BPApplication : NSApplication
 
-@property (readonly) BOOL hasKeyDocument;
-
 /**
  * Sends a message to the shared application manager to open the app's website using the default browser.
  */

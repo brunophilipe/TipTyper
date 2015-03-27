@@ -56,72 +56,69 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	id aux;
 
-	if ((aux = [defaults objectForKey:kBPDefaultBGCOLOR])) {
+	if ((aux = [defaults objectForKey:kBPDefaultBGCOLOR]))
 		[self setColor_bg:[NSKeyedUnarchiver unarchiveObjectWithData:aux]];
-	} else {
+	else
 		[self setColor_bg:kBP_TIPTYPER_BGCOLOR];
-	}
 
-	if ((aux = [defaults objectForKey:kBPDefaultTextColor])) {
+	if ((aux = [defaults objectForKey:kBPDefaultTextColor]))
 		[self setColor_text:[NSKeyedUnarchiver unarchiveObjectWithData:aux]];
-	} else {
+	else
 		[self setColor_text:kBP_TIPTYPER_TXTCOLOR];
-	}
 
-	if ((aux = [defaults objectForKey:kBPDefaultFont])) {
+	if ((aux = [defaults objectForKey:kBPDefaultFont]))
 		[self setCustomFont:[NSKeyedUnarchiver unarchiveObjectWithData:aux]];
-	} else {
+	else
 		[self setCustomFont:kBP_TIPTYPER_FONT];
-	}
 
-	if ((aux = [defaults objectForKey:kBPDefaultShowLines])) {
+	if ((aux = [defaults objectForKey:kBPDefaultShowLines]))
 		[self.checkbox_showLines setState:NSStateForNSNumber(aux)];
-	} else {
+	else
 		[self.checkbox_showLines setState:NSOnState];
-	}
 
-	if ((aux = [defaults objectForKey:kBPDefaultShowStatus])) {
+	if ((aux = [defaults objectForKey:kBPDefaultShowStatus]))
 		[self.checkbox_showStatus setState:NSStateForNSNumber(aux)];
-	} else {
+	else
 		[self.checkbox_showStatus setState:NSOnState];
-	}
 
-	if ((aux = [defaults objectForKey:kBPDefaultShowSpecials])) {
+	if ((aux = [defaults objectForKey:kBPDefaultShowSpecials]))
 		[self.checkbox_showInvisibles setState:NSStateForNSNumber(aux)];
-	} else {
+	else
 		[self.checkbox_showInvisibles setState:NSOffState];
-	}
 
-	if ((aux = [defaults objectForKey:kBPDefaultInsertTabs])) {
+	if ((aux = [defaults objectForKey:kBPDefaultInsertTabs]))
 		[self.checkbox_insertTabs setState:NSStateForNSNumber(aux)];
-	} else {
+	else
 		[self.checkbox_insertTabs setState:NSOnState];
-	}
 
-	if ((aux = [defaults objectForKey:kBPDefaultInsertSpaces])) {
+	if ((aux = [defaults objectForKey:kBPDefaultInsertSpaces]))
 		[self.checkbox_insertSpaces setState:NSStateForNSNumber(aux)];
-	} else {
+	else
 		[self.checkbox_insertSpaces setState:NSOffState];
-	}
 
-	if ((aux = [defaults objectForKey:kBPDefaultCountSpaces])) {
+	if ((aux = [defaults objectForKey:kBPDefaultCountSpaces]))
 		[self.checkbox_countSpaces setState:NSStateForNSNumber(aux)];
-	} else {
+	else
 		[self.checkbox_countSpaces setState:NSOffState];
-	}
 
-	if ((aux = [defaults objectForKey:kBPDefaultTabSize])) {
+	if ((aux = [defaults objectForKey:kBPDefaultTabSize]))
+	{
 		[self.field_tabSize setIntegerValue:[aux integerValue]];
 		[self.stepper_tabSize setIntegerValue:[aux integerValue]];
-	} else {
+	}
+	else
+	{
 		[self.field_tabSize setIntegerValue:4];
 		[self.stepper_tabSize setIntegerValue:4];
 	}
 
-	if ((aux = [defaults objectForKey:kBPDefaultEditorWidth])) {
+	if ((aux = [defaults objectForKey:kBPDefaultEditorWidth]))
+	{
 		[self.field_editorSize setIntegerValue:[aux integerValue]];
 		[self.stepper_editorSize setIntegerValue:[aux integerValue]];
-	} else {
+	}
+	else
+	{
 		[self.field_editorSize setIntegerValue:450];
 		[self.stepper_editorSize setIntegerValue:450];
 	}
@@ -154,14 +151,16 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 
 #pragma mark - Actions
 
-- (IBAction)action_changeFont:(id)sender {
+- (IBAction)action_changeFont:(id)sender
+{
 	[[NSFontManager sharedFontManager] setDelegate:self];
 
 	NSFontPanel *panel = [NSFontPanel sharedFontPanel];
 	[panel makeKeyAndOrderFront:self];
 }
 
-- (IBAction)action_revertDefaults:(id)sender {
+- (IBAction)action_revertDefaults:(id)sender
+{
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	[defaults removeObjectForKey:kBPDefaultBGCOLOR];
@@ -185,7 +184,8 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBPShouldReloadStyleNotification object:self];
 }
 
-- (IBAction)action_controlChanged:(id)sender {
+- (IBAction)action_controlChanged:(id)sender
+{
 	switch ([(NSControl *)sender tag]) {
 		case -1: //Show lines
 			self.changedAttributes |= BP_DEFAULTS_SHOWLINES;
@@ -238,50 +238,62 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 	}
 }
 
-- (IBAction)action_applyChanges:(id)sender {
+- (IBAction)action_applyChanges:(id)sender
+{
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	if (self.changedAttributes & BP_DEFAULTS_FONT) {
+	if (self.changedAttributes & BP_DEFAULTS_FONT)
+	{
 		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.currentFont]
 					 forKey:kBPDefaultFont];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_BGCOLOR) {
+	if (self.changedAttributes & BP_DEFAULTS_BGCOLOR)
+	{
 		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.color_bg]
 					 forKey:kBPDefaultBGCOLOR];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_TXTCOLOR) {
+	if (self.changedAttributes & BP_DEFAULTS_TXTCOLOR)
+	{
 		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.color_text]
 					 forKey:kBPDefaultTextColor];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_SHOWLINES) {
+	if (self.changedAttributes & BP_DEFAULTS_SHOWLINES)
+	{
 		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_showLines state] == NSOnState)]
 					 forKey:kBPDefaultShowLines];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_SHOWSTATUS) {
+	if (self.changedAttributes & BP_DEFAULTS_SHOWSTATUS)
+	{
 		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_showStatus state] == NSOnState)]
 					 forKey:kBPDefaultShowStatus];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_INSERTTABS) {
+	if (self.changedAttributes & BP_DEFAULTS_INSERTTABS)
+	{
 		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_insertTabs state] == NSOnState)]
 					 forKey:kBPDefaultInsertTabs];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_INSERTSPACES) {
+	if (self.changedAttributes & BP_DEFAULTS_INSERTSPACES)
+	{
 		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_insertSpaces state] == NSOnState)]
 					 forKey:kBPDefaultInsertSpaces];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_COUNTSPACES) {
+	if (self.changedAttributes & BP_DEFAULTS_COUNTSPACES)
+	{
 		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_countSpaces state] == NSOnState)]
 					 forKey:kBPDefaultCountSpaces];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_TABSIZE) {
+	if (self.changedAttributes & BP_DEFAULTS_TABSIZE)
+	{
 		[defaults setObject:[NSNumber numberWithInteger:[self.field_tabSize integerValue]]
 					 forKey:kBPDefaultTabSize];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_EDITORWIDTH) {
+	if (self.changedAttributes & BP_DEFAULTS_EDITORWIDTH)
+	{
 		[defaults setObject:[NSNumber numberWithInteger:[self.field_editorSize integerValue]]
 					 forKey:kBPDefaultEditorWidth];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_SHOWSPECIALS) {
+	if (self.changedAttributes & BP_DEFAULTS_SHOWSPECIALS)
+	{
 		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_showInvisibles state] == NSOnState)]
 					 forKey:kBPDefaultShowSpecials];
 	}
