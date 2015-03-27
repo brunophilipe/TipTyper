@@ -48,6 +48,11 @@
 	return @"BPDocument";
 }
 
+- (BOOL)isLoadedFromFile
+{
+	return self.fileURL != nil;
+}
+
 - (void)windowControllerDidLoadNib:(NSWindowController *)aController
 {
 	[super windowControllerDidLoadNib:aController];
@@ -100,11 +105,11 @@
 {
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[url relativePath]])
 	{
-		NSError *error = nil;
 		NSNumber *fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:[url relativePath]
-																			   error:&error] objectForKey:NSFileSize];
+																			   error:outError] objectForKey:NSFileSize];
 		
-		if ([fileSize unsignedIntegerValue] > 500 * 1000000) { //Filesize > 500MB
+		if ([fileSize unsignedIntegerValue] > 500 * 1000000) //Filesize > 500MB
+		{
 			NSAlert *alert = [NSAlert alertWithMessageText:@"Error"
 											 defaultButton:@"OK"
 										   alternateButton:nil
@@ -112,13 +117,6 @@
 								 informativeTextWithFormat:@"TipTyper doesn't support files greater than 500MB. This is a work in progress."];
 			[alert runModal];
 		}
-
-		if (error) {
-			NSAlert *alert = [NSAlert alertWithError:error];
-			[alert runModal];
-		}
-
-		*outError = nil;
 
 		return [self readFromURL:url ofType:typeName error:outError];
 	}

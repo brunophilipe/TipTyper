@@ -20,6 +20,7 @@
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 @import Cocoa;
+
 #import "BPDocumentWindow.h"
 
 @class BPDocumentWindow;
@@ -29,7 +30,7 @@
 @property (strong) NSString *fileString;
 @property (strong) BPDocumentWindow *displayWindow;
 
-@property (getter = isLoadedFromFile) BOOL loadedFromFile;
+@property (getter = isLoadedFromFile, readonly) BOOL loadedFromFile;
 
 @property (readonly) NSStringEncoding encoding;
 

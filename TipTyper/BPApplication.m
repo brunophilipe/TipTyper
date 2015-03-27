@@ -47,6 +47,17 @@ NSString *const kBPTipTyperWebsite = @"http://www.brunophilipe.com/software/tipt
 	NSWindow *prefWindow;
 }
 
+- (BOOL)hasLoadedDocumentInKeyWindow
+{
+	id keyWindow = [self keyWindow];
+	
+	BOOL status = (keyWindow
+				   && [keyWindow isMemberOfClass:[BPDocumentWindow class]]
+				   && [[keyWindow document] isLoadedFromFile]);
+	
+	return status;
+}
+
 - (IBAction)openWebsite:(id)sender
 {
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:kBPTipTyperWebsite]];

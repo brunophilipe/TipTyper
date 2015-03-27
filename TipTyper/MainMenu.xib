@@ -103,6 +103,7 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="pickEncodingAndReload:" target="-1" id="uxq-ZD-6uh"/>
+                                    <binding destination="-2" name="enabled" keyPath="self.hasLoadedDocumentInKeyWindow" id="7sI-IF-XDe"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
