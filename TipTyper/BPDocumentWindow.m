@@ -289,8 +289,9 @@
 		[self.textView setTabSize:4];
 		[self setTabWidthToNumberOfSpaces:4];
 	}
-
+#ifdef DEBUG
 	NSLog(@"Loaded tab settings from defaults");
+#endif
 
 	[self.undoManager enableUndoRegistration];
 }
@@ -330,7 +331,9 @@
 
 	[self loadTabSettingsFromDefaults];
 
+#ifdef DEBUG
 	NSLog(@"Loaded style from defaults");
+#endif
 
 	[self.undoManager enableUndoRegistration];
 }
