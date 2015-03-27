@@ -99,10 +99,10 @@
                                     </items>
                                 </menu>
                             </menuItem>
-                            <menuItem title="Reopen with Encoding..." hidden="YES" id="vpF-0X-QPB">
+                            <menuItem title="Reopen with Encoding…" id="vpF-0X-QPB">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="pickEncodingAndReload" target="-1" id="fpM-Hh-mnL"/>
+                                    <action selector="pickEncodingAndReload:" target="-1" id="uxq-ZD-6uh"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>

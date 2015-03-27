@@ -80,8 +80,13 @@
 	if (fileURL)
 	{
 		NSInteger result = 1;
+		NSStringEncoding oldEncoding = NSUTF8StringEncoding;
 		
-		NSString *curEncodingName = [[BPEncodingTool sharedTool] nameForEncoding:NSUTF8StringEncoding];
+		if (usedEncoding != NULL && usedEncoding > 0) {
+			oldEncoding = *usedEncoding;
+		}
+		
+		NSString *curEncodingName = [[BPEncodingTool sharedTool] nameForEncoding:oldEncoding];
 		
 		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"BP_MESSAGE_PICKENCODING", nil)
 										 defaultButton:NSLocalizedString(@"BP_GENERIC_OK", nil)
@@ -144,7 +149,7 @@
 	return nil;
 }
 
-- (void)menuEncodingChanged:(id)sender
++ (void)menuEncodingChanged:(id)sender
 {
 	NSPopUpButton *button = sender;
 	[button setTitle:[button selectedItem].title];

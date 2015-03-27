@@ -37,6 +37,6 @@
 - (void)toggleInfoView:(id)sender;
 - (void)toggleInvisibles:(id)sender;
 
-//- (void)pickEncodingAndReload:(id)sender;
+- (IBAction)pickEncodingAndReload:(id)sender;
 
 @end

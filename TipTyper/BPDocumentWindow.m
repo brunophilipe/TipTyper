@@ -93,6 +93,11 @@
 												 name:kBPShouldReloadStyleNotification
 											   object:nil];
 	
+	[self updateEncodingLabel];
+}
+
+- (void)updateEncodingLabel
+{
 	[[self.infoView viewWithTag:4] setStringValue:[[BPEncodingTool sharedTool] nameForEncoding:self.document.encoding]];
 }
 
@@ -204,6 +209,11 @@
 	[self textDidChange:nil];
 
 	[self.undoManager removeAllActions];
+	
+	if (self.document)
+	{
+		[self updateEncodingLabel];
+	}
 }
 
 - (void)goToLine:(NSUInteger)line

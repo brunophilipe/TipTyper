@@ -172,18 +172,21 @@
 }
 
 #pragma mark - Actions
-/*
-- (void)pickEncodingAndReload:(id)sender
-{
-	NSString *string = [self reloadWithDifferentEncoding];
 
-	if (string)
+- (IBAction)pickEncodingAndReload:(id)sender
+{
+	NSStringEncoding usedEncoding = self.encoding;
+	NSString *string = [BPEncodingTool loadStringWithPathAskingForEncoding:self.fileURL usedEncoding:&usedEncoding];
+
+	if (string && usedEncoding > 0)
 	{
+		_encoding = usedEncoding;
+		
 		[self setFileString:string];
 		[self.displayWindow updateTextViewContents];
 	}
 }
- */
+
 
 - (void)toggleLinesCounter:(id)sender
 {
