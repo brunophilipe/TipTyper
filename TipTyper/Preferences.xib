@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6254"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BPPreferencesWindowController">
@@ -28,7 +28,7 @@
         <window title="TipTyper Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <rect key="contentRect" x="458" y="189" width="480" height="508"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1360" height="745"/>
             <value key="minSize" type="size" width="480" height="508"/>
             <value key="maxSize" type="size" width="480" height="508"/>
             <view key="contentView" id="2">
@@ -238,7 +238,7 @@
                         </textFieldCell>
                     </textField>
                     <stepper focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" tag="-6" translatesAutoresizingMaskIntoConstraints="NO" id="BVS-HQ-qwo">
-                        <rect key="frame" x="199" y="400" width="19" height="27"/>
+                        <rect key="frame" x="199" y="401" width="19" height="27"/>
                         <stepperCell key="cell" continuous="YES" focusRingType="none" alignment="left" minValue="2" maxValue="16" doubleValue="4" id="UyK-g3-THu"/>
                         <connections>
                             <action selector="action_controlChanged:" target="-2" id="aiC-xi-F0n"/>
@@ -288,7 +288,7 @@
                         </textFieldCell>
                     </textField>
                     <stepper focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" tag="-9" translatesAutoresizingMaskIntoConstraints="NO" id="lDQ-2g-Z1n">
-                        <rect key="frame" x="214" y="361" width="19" height="27"/>
+                        <rect key="frame" x="214" y="362" width="19" height="27"/>
                         <stepperCell key="cell" focusRingType="none" alignment="left" increment="25" minValue="400" maxValue="3000" doubleValue="450" autorepeat="NO" id="nM8-8i-x8z"/>
                         <connections>
                             <action selector="action_controlChanged:" target="-2" id="pXY-MH-kUa"/>
