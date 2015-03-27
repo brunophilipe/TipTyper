@@ -37,8 +37,8 @@
     self = [super init];
     if (self)
 	{
-		self.fileString = @"";
-		self.encoding = NSUTF8StringEncoding;
+		_fileString = @"";
+		_encoding = NSUTF8StringEncoding;
     }
     return self;
 }
@@ -53,8 +53,8 @@
 	[super windowControllerDidLoadNib:aController];
 
 	[self setDisplayWindow:(BPDocumentWindow*)aController.window];
-	[self.displayWindow construct];
 	[self.displayWindow setDocument:self];
+	[self.displayWindow construct];
 	[self.displayWindow updateTextViewContents];
 }
 
@@ -68,16 +68,23 @@
 	NSStringEncoding usedEncoding;
 	NSError *error;
 	NSString *string = [NSString stringWithContentsOfURL:url usedEncoding:&usedEncoding error:&error];
-
+	
 	if (string && usedEncoding > 0 && !error) {
+		_encoding = usedEncoding;
+		
 		[self setFileString:string];
-		[self setEncoding:usedEncoding];
 		[self.displayWindow updateTextViewContents];
-		return YES;
 	} else {
-		*outError = error;
-		return NO;
+		string = [self reloadURLWithDifferentEncoding:url];
+		
+		if (string)
+		{
+			[self setFileString:string];
+			[self.displayWindow updateTextViewContents];
+		}
 	}
+	
+	return string != nil;
 }
 
 - (BOOL)writeToURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError
@@ -132,11 +139,13 @@
 	[super canCloseDocumentWithDelegate:delegate shouldCloseSelector:shouldCloseSelector contextInfo:contextInfo];
 }
 
-- (NSString*)reloadWithDifferentEncoding
+- (NSString*)reloadURLWithDifferentEncoding:(NSURL*)fileURL
 {
-	if (self.isLoadedFromFile || self.fileURL) {
+	if (fileURL) {
 		NSInteger result = 1;
+		
 		NSString *curEncodingName = [[BPEncodingTool sharedTool] nameForEncoding:_encoding];
+		
 		NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"BP_MESSAGE_PICKENCODING", nil)
 										 defaultButton:NSLocalizedString(@"BP_GENERIC_OK", nil)
 									   alternateButton:NSLocalizedString(@"BP_GENERIC_CANCEL", nil)
@@ -168,16 +177,13 @@
                 inputString = [[NSString alloc] initWithContentsOfURL:self.fileURL encoding:encoding error:&error];
 
                 if (error) {
-                    alert = [NSAlert alertWithError:error];
-                    [alert runModal];
+                    NSAlert *errorAlert = [NSAlert alertWithError:error];
+                    [errorAlert runModal];
                 }
 
                 if (inputString) {
                     //Change the local encoding to the selected
                     _encoding = encoding;
-
-//				[self.displayWindow.textView setString:inputString];
-                    [[self.displayWindow.infoView viewWithTag:4] setStringValue:button.selectedItem.title];
                     return inputString;
                 }
             }
@@ -224,7 +230,7 @@
 }
 
 #pragma mark - Actions
-
+/*
 - (void)pickEncodingAndReload:(id)sender
 {
 	NSString *string = [self reloadWithDifferentEncoding];
@@ -235,6 +241,7 @@
 		[self.displayWindow updateTextViewContents];
 	}
 }
+ */
 
 - (void)menuEncodingChanged:(id)sender
 {

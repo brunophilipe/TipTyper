@@ -31,12 +31,12 @@
 
 @property (getter = isLoadedFromFile) BOOL loadedFromFile;
 
-@property NSStringEncoding encoding;
+@property (readonly) NSStringEncoding encoding;
 
 - (void)toggleLinesCounter:(id)sender;
 - (void)toggleInfoView:(id)sender;
 - (void)toggleInvisibles:(id)sender;
 
-- (void)pickEncodingAndReload:(id)sender;
+//- (void)pickEncodingAndReload:(id)sender;
 
 @end

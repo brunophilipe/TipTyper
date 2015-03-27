@@ -23,6 +23,7 @@
 #import "Libraries/LineCounter/MarkerLineNumberView.h"
 #import "Classes/NSString+WordsCount.h"
 #import "NSColor+Luminance.h"
+#import "BPEncodingTool.h"
 
 @interface BPDocumentWindow ()
 
@@ -91,6 +92,8 @@
 											 selector:@selector(loadStyleAttributesFromDefaults)
 												 name:kBPShouldReloadStyleNotification
 											   object:nil];
+	
+	[[self.infoView viewWithTag:4] setStringValue:[[BPEncodingTool sharedTool] nameForEncoding:self.document.encoding]];
 }
 
 - (void)scrollViewDidScroll:(NSNotification *)notif
