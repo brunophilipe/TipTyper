@@ -224,9 +224,15 @@
 	NSError *error;
 
 	if (line > 1) {
-		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\n|\r|\r\n)" options:NSRegularExpressionCaseInsensitive error:&error];
+		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\n|\r|\r\n)"
+																			   options:NSRegularExpressionCaseInsensitive
+																				 error:&error];
 
-		[regex enumerateMatchesInString:string options:0 range:NSMakeRange(0, string.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+		[regex enumerateMatchesInString:string
+								options:0
+								  range:NSMakeRange(0, string.length)
+							 usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop)
+		{
 			if (result.resultType == NSTextCheckingTypeRegularExpression) {
 				if (curLine == line) {
 					range = NSMakeRange(lastRange.location+1, result.range.location-lastRange.location);
@@ -239,15 +245,25 @@
 
 		if (range.location == 0 && range.length == 0)
 		{
-			NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@"There is no such line!"];
+			NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!"
+											 defaultButton:@"OK"
+										   alternateButton:nil
+											   otherButton:nil
+								 informativeTextWithFormat:@"There is no such line!"];
+			
 			[alert setAlertStyle:NSWarningAlertStyle];
 			[alert.window setTitle:@"TipTyper"];
 			[alert runModal];
 			return;
 		}
-	} else {
-		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\n|\r)" options:NSRegularExpressionCaseInsensitive error:&error];
-		range = NSMakeRange(0, [regex rangeOfFirstMatchInString:string options:0 range:NSMakeRange(0, string.length)].location+1);
+	}
+	else
+ {
+		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\n|\r)"
+																			   options:NSRegularExpressionCaseInsensitive error:&error];
+		range = NSMakeRange(0, [regex rangeOfFirstMatchInString:string
+														options:0
+														  range:NSMakeRange(0, string.length)].location+1);
 	}
 
 	[self.textView setSelectedRange:range];

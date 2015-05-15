@@ -134,29 +134,49 @@
 	NSMutableArray *ranges = [[self selectedRanges] mutableCopy];
 	NSUInteger totalCharactersAdded = 0;
 
-	for (NSUInteger rangeIndex = 0; rangeIndex < ranges.count; rangeIndex++) {
+	for (NSUInteger rangeIndex = 0; rangeIndex < ranges.count; rangeIndex++)
+	{
 		NSRange currentRange = [[ranges objectAtIndex:rangeIndex] rangeValue];
 		NSUInteger charactersAdded = 0;
-		BOOL singleCharRange = currentRange.length == 0;
 
 		currentRange.location += totalCharactersAdded;
-		currentRange.length += singleCharRange ? 1 : 0;
+		currentRange.length   += 0;
 
 		NSString *text = self.string;
 		NSString *substring = [text substringWithRange:currentRange];
 		NSMutableArray *lineStarts = [NSMutableArray new];
-
-		[substring enumerateSubstringsInRange:NSMakeRange(0, substring.length) options:NSStringEnumerationByLines usingBlock:^(NSString *substr, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+		
+		void (^indentationBlock)(NSString*,NSRange,NSRange,BOOL*) = ^(NSString *substr, NSRange substringRange, NSRange enclosingRange, BOOL *stop)
+		{
 			NSUInteger lineStart = 0;
-			[text getLineStart:&lineStart end:nil contentsEnd:nil forRange:NSMakeRange(currentRange.location + substringRange.location, substringRange.length)];
+			
+			[text getLineStart:&lineStart
+						   end:nil
+				   contentsEnd:nil
+					  forRange:NSMakeRange(currentRange.location + substringRange.location, substringRange.length)];
+			
 			[lineStarts addObject:@(lineStart)];
-		}];
+		};
 
-		for (NSUInteger line=0; line<lineStarts.count; line++) {
+		if ([substring length] != 0)
+		{
+			[substring enumerateSubstringsInRange:NSMakeRange(0, substring.length)
+										  options:NSStringEnumerationByLines | NSStringEnumerationSubstringNotRequired
+									   usingBlock:indentationBlock];
+		}
+		else
+		{
+			indentationBlock(substring, NSMakeRange(0, 0), NSMakeRange(0, 0), NULL);
+		}
+
+		for (NSUInteger line=0; line<lineStarts.count; line++)
+		{
 			charactersAdded = [self increaseIndentationAtLocation:[[lineStarts objectAtIndex:line] integerValue] + charactersAdded * line];
 		}
 
-		[ranges replaceObjectAtIndex:rangeIndex withObject:[NSValue valueWithRange:NSMakeRange(currentRange.location + charactersAdded, currentRange.length - (singleCharRange ? 1 : 0) + charactersAdded * (lineStarts.count - 1))]];
+		[ranges replaceObjectAtIndex:rangeIndex
+						  withObject:[NSValue valueWithRange:NSMakeRange(currentRange.location + charactersAdded,
+																		 currentRange.length + charactersAdded * (lineStarts.count - 1))]];
 
 		totalCharactersAdded += charactersAdded * lineStarts.count;
 	}
@@ -172,20 +192,30 @@
 	for (NSUInteger rangeIndex = 0; rangeIndex < ranges.count; rangeIndex++) {
 		NSRange currentRange = [[ranges objectAtIndex:rangeIndex] rangeValue];
 		NSUInteger charactersRemoved = 0, charactersRemovedFirstLine = 0;
-		BOOL singleCharRange = currentRange.length == 0;
 
 		currentRange.location -= totalCharactersRemoved;
-		currentRange.length += singleCharRange ? 1 : 0;
 
 		NSString *text = self.string;
 		NSString *substring = [text substringWithRange:currentRange];
 		NSMutableArray *lineStarts = [NSMutableArray new];
-
-		[substring enumerateSubstringsInRange:NSMakeRange(0, substring.length) options:NSStringEnumerationByLines usingBlock:^(NSString *substr, NSRange substringRange, NSRange enclosingRange, BOOL *stop) {
+		
+		void (^indentationBlock)(NSString*,NSRange,NSRange,BOOL*) = ^(NSString *substr, NSRange substringRange, NSRange enclosingRange, BOOL *stop)
+		{
 			NSUInteger lineStart = 0;
 			[text getLineStart:&lineStart end:nil contentsEnd:nil forRange:NSMakeRange(currentRange.location + substringRange.location, substringRange.length)];
 			[lineStarts addObject:@(lineStart)];
-		}];
+		};
+
+		if ([substring length] != 0)
+		{
+			[substring enumerateSubstringsInRange:NSMakeRange(0, substring.length)
+										  options:NSStringEnumerationByLines
+									   usingBlock:indentationBlock];
+		}
+		else
+		{
+			indentationBlock(substring, NSMakeRange(0, 0), NSMakeRange(0, 0), NULL);
+		}
 
 		for (NSUInteger line=0; line<lineStarts.count; line++) {
 			charactersRemoved += [self decreaseIndentationAtLocation:[[lineStarts objectAtIndex:line] integerValue] - charactersRemoved];
@@ -196,9 +226,9 @@
 		NSValue *newRange = nil;
 
 		if ([substring hasPrefix:@"\t"] || [substring hasPrefix:@" "]) {
-			newRange = [NSValue valueWithRange:NSMakeRange(currentRange.location, currentRange.length - (singleCharRange ? 1 : 0) - charactersRemoved)];
+			newRange = [NSValue valueWithRange:NSMakeRange(currentRange.location, currentRange.length + charactersRemoved)];
 		} else {
-			newRange = [NSValue valueWithRange:NSMakeRange(currentRange.location - charactersRemovedFirstLine, currentRange.length - (singleCharRange ? 1 : 0) - (charactersRemoved - charactersRemovedFirstLine))];
+			newRange = [NSValue valueWithRange:NSMakeRange(currentRange.location - charactersRemovedFirstLine, currentRange.length - (charactersRemoved - charactersRemovedFirstLine))];
 		}
 
 		[ranges replaceObjectAtIndex:rangeIndex withObject:newRange];
