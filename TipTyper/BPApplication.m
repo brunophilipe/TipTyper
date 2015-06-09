@@ -19,9 +19,15 @@
 //  You should have received a copy of the GNU General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#import <CommonCrypto/CommonCrypto.h>
+
 #import "BPApplication.h"
 #import "DCOAboutWindowController.h"
 #import "BPPreferencesWindowController.h"
+
+#ifdef SPARKLE
+#import "Sparkle/Sparkle.h"
+#endif
 
 NSString *const kBPDefaultFont         = @"BP_DEFAULT_FONT";
 NSString *const kBPDefaultTextColor    = @"BP_DEFAULT_TXTCOLOR";
@@ -39,6 +45,12 @@ NSString *const kBPShouldReloadStyleNotification = @"BP_SHOULD_RELOAD_STYLE";
 
 NSString *const kBPTipTyperWebsite = @"http://www.brunophilipe.com/software/tiptyper";
 
+@interface BPApplication ()
+
+@property (strong) IBOutlet  NSMenuItem *checkForUpdateButton;
+
+@end
+
 @implementation BPApplication
 {
 	BPPreferencesWindowController *prefWindowController;
@@ -51,11 +63,29 @@ NSString *const kBPTipTyperWebsite = @"http://www.brunophilipe.com/software/tipt
 {
 	id keyWindow = [self keyWindow];
 	
-	BOOL status = (keyWindow
-				   && [keyWindow isMemberOfClass:[BPDocumentWindow class]]
-				   && [[keyWindow document] isLoadedFromFile]);
+	BOOL status = (keyWindow &&
+				   [keyWindow isMemberOfClass:[BPDocumentWindow class]] &&
+				   [[keyWindow document] isLoadedFromFile]);
 	
 	return status;
+}
+
+- (void)finishLaunching
+{
+	[super finishLaunching];
+	
+#ifdef SPARKLE
+	[[SUUpdater sharedUpdater] checkForUpdatesInBackground];
+#else
+	[self.checkForUpdateButton setHidden:YES];
+#endif
+}
+
+- (IBAction)checkForUpdate:(id)sender
+{
+#ifdef SPARKLE
+	[[SUUpdater sharedUpdater] checkForUpdates:sender];
+#endif
 }
 
 - (IBAction)openWebsite:(id)sender
@@ -74,6 +104,27 @@ NSString *const kBPTipTyperWebsite = @"http://www.brunophilipe.com/software/tipt
 	}
 
 	[prefWindowController performSelector:@selector(showWindow:) withObject:self afterDelay:0.2];
+}
+
+- (void)verifyExecutableChecksum
+{
+	NSURL *executableURL = [[[NSBundle mainBundle] bundleURL] URLByAppendingPathComponent:@"Contents/MacOS/TipTyper"];
+	
+	if ([[NSFileManager defaultManager] fileExistsAtPath:[executableURL path]] )
+	{
+		NSData *data = [NSData dataWithContentsOfURL:executableURL];
+		unsigned char digest[CC_SHA1_DIGEST_LENGTH];
+		CC_SHA1( data.bytes, (CC_LONG)data.length, digest );
+		
+		NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+		
+		for( int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++ )
+		{
+			[output appendFormat:@"%02x", digest[i]];
+		}
+		
+		NSLog(@"%@", output);
+	}
 }
 
 #pragma mark - IBActions

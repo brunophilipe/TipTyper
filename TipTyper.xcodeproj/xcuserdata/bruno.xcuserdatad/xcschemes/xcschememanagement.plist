@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>TipTyper (App Store).xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>TipTyper.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>159FE8F31B1E8A9C00518435</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>15C21D3518A83D5500C9D410</key>
 		<dict>
 			<key>primary</key>

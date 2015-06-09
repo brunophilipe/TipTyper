@@ -24,6 +24,34 @@
 		157528601A2D6B2A00EB002C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153911B018E496A9009FAB64 /* MainMenu.xib */; };
 		15753F5818AC78F5009E7E9E /* BPApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 15753F5718AC78F5009E7E9E /* BPApplication.m */; };
 		15962E831A0C6CB200E168EC /* BPPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15962E821A0C6CB200E168EC /* BPPreferencesWindowController.m */; };
+		159FE8F51B1E8A9C00518435 /* BPLayoutManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D9EB011A2B89AA006EC677 /* BPLayoutManager.m */; };
+		159FE8F61B1E8A9C00518435 /* BPBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C21DD318A94A5D00C9D410 /* BPBackgroundView.m */; };
+		159FE8F71B1E8A9C00518435 /* NoodleLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C21DC518A8580B00C9D410 /* NoodleLineNumberView.m */; };
+		159FE8F81B1E8A9C00518435 /* BPTopBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C21DD618A94F6800C9D410 /* BPTopBarView.m */; };
+		159FE8F91B1E8A9C00518435 /* NoodleLineNumberMarker.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C21DC318A8580B00C9D410 /* NoodleLineNumberMarker.m */; };
+		159FE8FA1B1E8A9C00518435 /* NSColor+Luminance.m in Sources */ = {isa = PBXBuildFile; fileRef = 15D9EB041A2BA99E006EC677 /* NSColor+Luminance.m */; };
+		159FE8FB1B1E8A9C00518435 /* NSString+WordsCount.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C21DD018A94A4E00C9D410 /* NSString+WordsCount.m */; };
+		159FE8FC1B1E8A9C00518435 /* BPTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1502C30518B9AF5D002EC738 /* BPTextView.m */; };
+		159FE8FD1B1E8A9C00518435 /* DCOAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15408A6718E3C90400127DA6 /* DCOAboutWindowController.m */; };
+		159FE8FE1B1E8A9C00518435 /* BPDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C21D4C18A83D5500C9D410 /* BPDocument.m */; };
+		159FE8FF1B1E8A9C00518435 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C21D4518A83D5500C9D410 /* main.m */; };
+		159FE9001B1E8A9C00518435 /* BPDocumentWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C21D7118A83D7C00C9D410 /* BPDocumentWindow.m */; };
+		159FE9011B1E8A9C00518435 /* BPEncodingTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1500F28118B056B500481A86 /* BPEncodingTool.m */; };
+		159FE9021B1E8A9C00518435 /* BPPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15962E821A0C6CB200E168EC /* BPPreferencesWindowController.m */; };
+		159FE9031B1E8A9C00518435 /* DCOTransparentScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 15408A6C18E3CA8B00127DA6 /* DCOTransparentScroller.m */; };
+		159FE9041B1E8A9C00518435 /* BPApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 15753F5718AC78F5009E7E9E /* BPApplication.m */; };
+		159FE9051B1E8A9C00518435 /* MarkerLineNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C21DC118A8580B00C9D410 /* MarkerLineNumberView.m */; };
+		159FE9061B1E8A9C00518435 /* DCOTransparentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15408A6E18E3CA8B00127DA6 /* DCOTransparentScrollView.m */; };
+		159FE9081B1E8A9C00518435 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C21D3918A83D5500C9D410 /* Cocoa.framework */; };
+		159FE90B1B1E8A9C00518435 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 153911AE18E496A9009FAB64 /* InfoPlist.strings */; };
+		159FE90C1B1E8A9C00518435 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 153911AF18E496A9009FAB64 /* Localizable.strings */; };
+		159FE90D1B1E8A9C00518435 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15C21D5418A83D5500C9D410 /* Images.xcassets */; };
+		159FE90E1B1E8A9C00518435 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153911B118E496A9009FAB64 /* Preferences.xib */; };
+		159FE90F1B1E8A9C00518435 /* BPDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153911AC18E496A9009FAB64 /* BPDocument.xib */; };
+		159FE9101B1E8A9C00518435 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153911B018E496A9009FAB64 /* MainMenu.xib */; };
+		159FE9111B1E8A9C00518435 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 153911AD18E496A9009FAB64 /* Credits.rtf */; };
+		159FE9121B1E8A9C00518435 /* DCOAboutWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 15408A6518E3C90400127DA6 /* DCOAboutWindow.xib */; };
+		159FE9131B1E8A9C00518435 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1502C2FB18B97B70002EC738 /* dsa_pub.pem */; };
 		15C21D3A18A83D5500C9D410 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C21D3918A83D5500C9D410 /* Cocoa.framework */; };
 		15C21D4618A83D5500C9D410 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C21D4518A83D5500C9D410 /* main.m */; };
 		15C21D4D18A83D5500C9D410 /* BPDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 15C21D4C18A83D5500C9D410 /* BPDocument.m */; };
@@ -91,6 +119,9 @@
 		157D76141A633F7A00223367 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		15962E811A0C6CB200E168EC /* BPPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPPreferencesWindowController.h; sourceTree = "<group>"; };
 		15962E821A0C6CB200E168EC /* BPPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPPreferencesWindowController.m; sourceTree = "<group>"; };
+		159FE91A1B1E8A9C00518435 /* TipTyper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipTyper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		159FE91B1B1E8A9D00518435 /* TipTyper-AppStore-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TipTyper-AppStore-Info.plist"; path = "/Users/Bruno/Workspace/Release Apps/OS X/TipTyper/TipTyper-AppStore-Info.plist"; sourceTree = "<absolute>"; };
+		159FE91C1B1E8D3000518435 /* TipTyper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TipTyper.entitlements; sourceTree = "<group>"; };
 		15C21D3618A83D5500C9D410 /* TipTyper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipTyper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15C21D3918A83D5500C9D410 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		15C21D3C18A83D5500C9D410 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -128,6 +159,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		159FE9071B1E8A9C00518435 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				159FE9081B1E8A9C00518435 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		15C21D3318A83D5500C9D410 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -167,6 +206,7 @@
 		15C21D2D18A83D5500C9D410 = {
 			isa = PBXGroup;
 			children = (
+				159FE91C1B1E8D3000518435 /* TipTyper.entitlements */,
 				15C21D3F18A83D5500C9D410 /* TipTyper */,
 				15C21D6018A83D5600C9D410 /* TipTyperTests */,
 				15C21D3818A83D5500C9D410 /* Frameworks */,
@@ -179,6 +219,7 @@
 			children = (
 				15C21D3618A83D5500C9D410 /* TipTyper.app */,
 				15C21D5A18A83D5500C9D410 /* TipTyperTests.xctest */,
+				159FE91A1B1E8A9C00518435 /* TipTyper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -234,6 +275,7 @@
 				153911AF18E496A9009FAB64 /* Localizable.strings */,
 				1502C2FB18B97B70002EC738 /* dsa_pub.pem */,
 				15C21D4118A83D5500C9D410 /* TipTyper-Info.plist */,
+				159FE91B1B1E8A9D00518435 /* TipTyper-AppStore-Info.plist */,
 				15C21D4518A83D5500C9D410 /* main.m */,
 				15C21D4718A83D5500C9D410 /* TipTyper-Prefix.pch */,
 				15E4929F18A9B1FB004C4901 /* BumpBuild.sh */,
@@ -306,6 +348,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		159FE8F31B1E8A9C00518435 /* TipTyper (App Store) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 159FE9171B1E8A9C00518435 /* Build configuration list for PBXNativeTarget "TipTyper (App Store)" */;
+			buildPhases = (
+				159FE8F41B1E8A9C00518435 /* Sources */,
+				159FE9071B1E8A9C00518435 /* Frameworks */,
+				159FE90A1B1E8A9C00518435 /* Resources */,
+				159FE9141B1E8A9C00518435 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TipTyper (App Store)";
+			productName = TipTyper;
+			productReference = 159FE91A1B1E8A9C00518435 /* TipTyper.app */;
+			productType = "com.apple.product-type.application";
+		};
 		15C21D3518A83D5500C9D410 /* TipTyper */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 15C21D6A18A83D5600C9D410 /* Build configuration list for PBXNativeTarget "TipTyper" */;
@@ -353,6 +413,17 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Bruno Philipe";
 				TargetAttributes = {
+					159FE8F31B1E8A9C00518435 = {
+						DevelopmentTeam = R85D3K8ATT;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
+					};
+					15C21D3518A83D5500C9D410 = {
+						DevelopmentTeam = R85D3K8ATT;
+					};
 					15C21D5918A83D5500C9D410 = {
 						TestTargetID = 15C21D3518A83D5500C9D410;
 					};
@@ -373,12 +444,29 @@
 			projectRoot = "";
 			targets = (
 				15C21D3518A83D5500C9D410 /* TipTyper */,
+				159FE8F31B1E8A9C00518435 /* TipTyper (App Store) */,
 				15C21D5918A83D5500C9D410 /* TipTyperTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		159FE90A1B1E8A9C00518435 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				159FE90B1B1E8A9C00518435 /* InfoPlist.strings in Resources */,
+				159FE90C1B1E8A9C00518435 /* Localizable.strings in Resources */,
+				159FE90D1B1E8A9C00518435 /* Images.xcassets in Resources */,
+				159FE90E1B1E8A9C00518435 /* Preferences.xib in Resources */,
+				159FE90F1B1E8A9C00518435 /* BPDocument.xib in Resources */,
+				159FE9101B1E8A9C00518435 /* MainMenu.xib in Resources */,
+				159FE9111B1E8A9C00518435 /* Credits.rtf in Resources */,
+				159FE9121B1E8A9C00518435 /* DCOAboutWindow.xib in Resources */,
+				159FE9131B1E8A9C00518435 /* dsa_pub.pem in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		15C21D3418A83D5500C9D410 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -418,9 +506,47 @@
 			shellPath = /bin/sh;
 			shellScript = "infoplist=\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"\n/bin/sh \"TipTyper/BumpBuild.sh\" $infoplist\nbuilddate=`date +%s`\nif [[ -n \"$builddate\" ]]; then\ndefaults write \"${infoplist%.plist}\" BuildDate \"${builddate}\"\nfi";
 		};
+		159FE9141B1E8A9C00518435 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "infoplist=\"$BUILT_PRODUCTS_DIR/$INFOPLIST_PATH\"\n/bin/sh \"TipTyper/BumpBuild.sh\" $infoplist\nbuilddate=`date +%s`\nif [[ -n \"$builddate\" ]]; then\ndefaults write \"${infoplist%.plist}\" BuildDate \"${builddate}\"\nfi";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		159FE8F41B1E8A9C00518435 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				159FE8F51B1E8A9C00518435 /* BPLayoutManager.m in Sources */,
+				159FE8F61B1E8A9C00518435 /* BPBackgroundView.m in Sources */,
+				159FE8F71B1E8A9C00518435 /* NoodleLineNumberView.m in Sources */,
+				159FE8F81B1E8A9C00518435 /* BPTopBarView.m in Sources */,
+				159FE8F91B1E8A9C00518435 /* NoodleLineNumberMarker.m in Sources */,
+				159FE8FA1B1E8A9C00518435 /* NSColor+Luminance.m in Sources */,
+				159FE8FB1B1E8A9C00518435 /* NSString+WordsCount.m in Sources */,
+				159FE8FC1B1E8A9C00518435 /* BPTextView.m in Sources */,
+				159FE8FD1B1E8A9C00518435 /* DCOAboutWindowController.m in Sources */,
+				159FE8FE1B1E8A9C00518435 /* BPDocument.m in Sources */,
+				159FE8FF1B1E8A9C00518435 /* main.m in Sources */,
+				159FE9001B1E8A9C00518435 /* BPDocumentWindow.m in Sources */,
+				159FE9011B1E8A9C00518435 /* BPEncodingTool.m in Sources */,
+				159FE9021B1E8A9C00518435 /* BPPreferencesWindowController.m in Sources */,
+				159FE9031B1E8A9C00518435 /* DCOTransparentScroller.m in Sources */,
+				159FE9041B1E8A9C00518435 /* BPApplication.m in Sources */,
+				159FE9051B1E8A9C00518435 /* MarkerLineNumberView.m in Sources */,
+				159FE9061B1E8A9C00518435 /* DCOTransparentScrollView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		15C21D3218A83D5500C9D410 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -465,6 +591,48 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		159FE9181B1E8A9C00518435 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TipTyper.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TipTyper/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TipTyper/TipTyper-Prefix.pch";
+				INFOPLIST_FILE = "TipTyper-AppStore-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = TipTyper;
+				PROVISIONING_PROFILE = "34f8bbe2-1920-46c1-86b2-1d7588aaf6dc";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		159FE9191B1E8A9C00518435 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TipTyper.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TipTyper/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TipTyper/TipTyper-Prefix.pch";
+				INFOPLIST_FILE = "TipTyper-AppStore-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = TipTyper;
+				PROVISIONING_PROFILE = "9dad5ba9-7dae-46cf-aad9-7d1c9d8c0e44";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		15C21D6818A83D5600C9D410 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -542,6 +710,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -549,9 +718,14 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TipTyper/TipTyper-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SPARKLE=1",
+					"DEBUG=1",
+				);
 				INFOPLIST_FILE = "TipTyper/TipTyper-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -560,6 +734,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -567,9 +742,11 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TipTyper/TipTyper-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "SPARKLE=1";
 				INFOPLIST_FILE = "TipTyper/TipTyper-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -617,6 +794,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		159FE9171B1E8A9C00518435 /* Build configuration list for PBXNativeTarget "TipTyper (App Store)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				159FE9181B1E8A9C00518435 /* Debug */,
+				159FE9191B1E8A9C00518435 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		15C21D3118A83D5500C9D410 /* Build configuration list for PBXProject "TipTyper" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -45,6 +45,11 @@ extern NSString *const kBPTipTyperWebsite;
 - (BOOL)hasLoadedDocumentInKeyWindow;
 
 /**
+ * Checks for updates with Sparkle. (If built for Mac App Store, does nothing).
+ */
+- (IBAction)checkForUpdate:(id)sender;
+
+/**
  * Sends a message to the shared application manager to open the app's website using the default browser.
  */
 - (IBAction)openWebsite:(id)sender;
