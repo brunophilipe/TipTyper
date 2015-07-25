@@ -82,7 +82,7 @@
 		NSInteger result = 1;
 		NSStringEncoding oldEncoding = NSUTF8StringEncoding;
 		
-		if (usedEncoding != NULL && usedEncoding > 0) {
+		if (usedEncoding != NULL && *usedEncoding > 0) {
 			oldEncoding = *usedEncoding;
 		}
 		
