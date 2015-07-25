@@ -70,16 +70,29 @@
 
 - (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError
 {
-	NSStringEncoding usedEncoding;
-	NSError *error;
-	NSString *string = [NSString stringWithContentsOfURL:url usedEncoding:&usedEncoding error:&error];
+	NSStringEncoding usedEncoding = 0;
+	NSError *error = nil;
+	NSString *string = nil;
 	
-	if (string && usedEncoding > 0 && !error) {
+	error = [self checkSizeWithUrl:url];
+	
+	if (error)
+	{
+		*outError = error;
+		return NO;
+	}
+	
+	string = [NSString stringWithContentsOfURL:url usedEncoding:&usedEncoding error:&error];
+	
+	if (string && usedEncoding > 0 && !error)
+	{
 		_encoding = usedEncoding;
 		
 		[self setFileString:string];
 		[self.displayWindow updateTextViewContents];
-	} else {
+	}
+	else
+	{
 		usedEncoding = 0;
 		
 		string = [BPEncodingTool loadStringWithPathAskingForEncoding:url usedEncoding:&usedEncoding];
@@ -105,19 +118,14 @@
 {
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[url relativePath]])
 	{
-		NSNumber *fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:[url relativePath]
-																			   error:outError] objectForKey:NSFileSize];
-		
-		if ([fileSize unsignedIntegerValue] > 500 * 1000000) //Filesize > 500MB
-		{
-			NSAlert *alert = [NSAlert alertWithMessageText:@"Error"
-											 defaultButton:@"OK"
-										   alternateButton:nil
-											   otherButton:nil
-								 informativeTextWithFormat:@"TipTyper doesn't support files greater than 500MB. This is a work in progress."];
-			[alert runModal];
-		}
+		NSError *error = [self checkSizeWithUrl:url];
 
+		if (error)
+		{
+			*outError = error;
+			return NO;
+		}
+		
 		return [self readFromURL:url ofType:typeName error:outError];
 	}
 
@@ -138,6 +146,28 @@
 - (void)canCloseDocumentWithDelegate:(id)delegate shouldCloseSelector:(SEL)shouldCloseSelector contextInfo:(void *)contextInfo
 {
 	[super canCloseDocumentWithDelegate:delegate shouldCloseSelector:shouldCloseSelector contextInfo:contextInfo];
+}
+
+- (NSError*)checkSizeWithUrl:(NSURL*)url
+{
+	NSError *error = nil;
+	NSNumber *fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:[url relativePath]
+																		   error:&error] objectForKey:NSFileSize];
+	
+	if (error)
+	{
+		return error;
+	}
+	
+	if ([fileSize unsignedIntegerValue] > 500 * 1000000) //Filesize > 500MB
+	{
+		return [NSError errorWithDomain:@"TipTyper"
+								   code:0x1001
+							   userInfo:@{NSLocalizedFailureReasonErrorKey:
+											  NSLocalizedString(@"BP_ERROR_FILESIZE", nil)}];
+	}
+	
+	return nil;
 }
 
 #pragma mark - Save Panel

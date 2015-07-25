@@ -23,3 +23,4 @@
 "BP_ERROR_ENCODING_TITLE"	= "Encoding Error";
 "BP_ERROR_ENCODING_MSG"		= "TipTyper was not able to read the file with the selected encoding. Please, try another encoding or verify the file.";
 "BP_ERROR_ENCODING_NOFILE"	= "No file is open in TipTyper. Unexpected error. Please report this as a bug.";
+"BP_ERROR_FILESIZE"			= "TipTyper doesn't support files greater than 500MB.";
