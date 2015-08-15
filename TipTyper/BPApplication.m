@@ -113,12 +113,12 @@ NSString *const kBPTipTyperWebsite = @"http://www.brunophilipe.com/software/tipt
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[executableURL path]] )
 	{
 		NSData *data = [NSData dataWithContentsOfURL:executableURL];
-		unsigned char digest[CC_SHA1_DIGEST_LENGTH];
-		CC_SHA1( data.bytes, (CC_LONG)data.length, digest );
+		unsigned char digest[CC_SHA512_DIGEST_LENGTH];
+		CC_SHA512( data.bytes, (CC_LONG)data.length, digest );
 		
-		NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
+		NSMutableString *output = [NSMutableString stringWithCapacity:CC_SHA512_DIGEST_LENGTH * 2];
 		
-		for( int i = 0; i < CC_SHA1_DIGEST_LENGTH; i++ )
+		for( int i = 0; i < CC_SHA512_DIGEST_LENGTH; i++ )
 		{
 			[output appendFormat:@"%02x", digest[i]];
 		}

@@ -39,5 +39,6 @@
 - (void)toggleInvisibles:(id)sender;
 
 - (IBAction)pickEncodingAndReload:(id)sender;
+- (IBAction)pickEncodingAndSave:(id)sender;
 
 @end

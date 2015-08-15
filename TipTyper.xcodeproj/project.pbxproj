@@ -10,8 +10,6 @@
 		1500F28218B056B500481A86 /* BPEncodingTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1500F28118B056B500481A86 /* BPEncodingTool.m */; };
 		1502C2FC18B97B70002EC738 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 1502C2FB18B97B70002EC738 /* dsa_pub.pem */; };
 		1502C30618B9AF5D002EC738 /* BPTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1502C30518B9AF5D002EC738 /* BPTextView.m */; };
-		15041C50194D35F800E56E4F /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1502C2F918B97AAD002EC738 /* Sparkle.framework */; };
-		15041C51194D35FC00E56E4F /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1502C2F918B97AAD002EC738 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		153911B218E496A9009FAB64 /* BPDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153911AC18E496A9009FAB64 /* BPDocument.xib */; };
 		153911B318E496A9009FAB64 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 153911AD18E496A9009FAB64 /* Credits.rtf */; };
 		153911B418E496A9009FAB64 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 153911AE18E496A9009FAB64 /* InfoPlist.strings */; };
@@ -21,6 +19,8 @@
 		15408A6918E3C90400127DA6 /* DCOAboutWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15408A6718E3C90400127DA6 /* DCOAboutWindowController.m */; };
 		15408A6F18E3CA8B00127DA6 /* DCOTransparentScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 15408A6C18E3CA8B00127DA6 /* DCOTransparentScroller.m */; };
 		15408A7018E3CA8B00127DA6 /* DCOTransparentScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 15408A6E18E3CA8B00127DA6 /* DCOTransparentScrollView.m */; };
+		154A12C91B7ED38A000D276B /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1502C2F918B97AAD002EC738 /* Sparkle.framework */; };
+		154A12CA1B7ED38A000D276B /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1502C2F918B97AAD002EC738 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		157528601A2D6B2A00EB002C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 153911B018E496A9009FAB64 /* MainMenu.xib */; };
 		15753F5818AC78F5009E7E9E /* BPApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 15753F5718AC78F5009E7E9E /* BPApplication.m */; };
 		15962E831A0C6CB200E168EC /* BPPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15962E821A0C6CB200E168EC /* BPPreferencesWindowController.m */; };
@@ -81,14 +81,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		1502C2FE18B97E9E002EC738 /* CopyFiles */ = {
+		154A12CB1B7ED38A000D276B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				15041C51194D35FC00E56E4F /* Sparkle.framework in CopyFiles */,
+				154A12CA1B7ED38A000D276B /* Sparkle.framework in Embed Frameworks */,
 			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -172,7 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15C21D3A18A83D5500C9D410 /* Cocoa.framework in Frameworks */,
-				15041C50194D35F800E56E4F /* Sparkle.framework in Frameworks */,
+				154A12C91B7ED38A000D276B /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,7 +375,7 @@
 				15C21D3318A83D5500C9D410 /* Frameworks */,
 				15C21D3418A83D5500C9D410 /* Resources */,
 				152CF4F818A9B264008D2ED8 /* ShellScript */,
-				1502C2FE18B97E9E002EC738 /* CopyFiles */,
+				154A12CB1B7ED38A000D276B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -723,6 +724,7 @@
 					"DEBUG=1",
 				);
 				INFOPLIST_FILE = "TipTyper/TipTyper-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -744,6 +746,7 @@
 				GCC_PREFIX_HEADER = "TipTyper/TipTyper-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "SPARKLE=1";
 				INFOPLIST_FILE = "TipTyper/TipTyper-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

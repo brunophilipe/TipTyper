@@ -98,7 +98,7 @@
 		
 		NSPopUpButton __strong *button = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(0, 0, 160, 40) pullsDown:YES];
 		
-		[button addItemsWithTitles:[[BPEncodingTool sharedTool] getAllEncodings]];
+		[button addItemsWithTitles:[[[self class] sharedTool] getAllEncodings]];
 		[button selectItemWithTitle:curEncodingName];
 		[button setTitle:curEncodingName];
 		[button setTarget:self];
@@ -147,6 +147,39 @@
 	}
 	
 	return nil;
+}
+
++ (NSStringEncoding)requestEncoding:(NSStringEncoding)oldEncoding
+{
+	NSString *curEncodingName = [[BPEncodingTool sharedTool] nameForEncoding:oldEncoding];
+	
+	NSAlert *alert = [NSAlert alertWithMessageText:NSLocalizedString(@"BP_MESSAGE_PICKENCODING", nil)
+									 defaultButton:NSLocalizedString(@"BP_GENERIC_OK", nil)
+								   alternateButton:NSLocalizedString(@"BP_GENERIC_CANCEL", nil)
+									   otherButton:nil
+						 informativeTextWithFormat:NSLocalizedString(@"BP_MESSAGE_ENCODING", nil)];
+	
+	[alert.window setTitle:NSLocalizedString(@"BP_MESSAGE_AUTOENCODING", nil)];
+	
+	NSPopUpButton __strong *button = [[NSPopUpButton alloc] initWithFrame:NSMakeRect(0, 0, 160, 40) pullsDown:YES];
+	
+	[button addItemsWithTitles:[[[self class] sharedTool] getAllEncodings]];
+	[button selectItemWithTitle:curEncodingName];
+	[button setTitle:curEncodingName];
+	[button setTarget:self];
+	[button setAction:@selector(menuEncodingChanged:)];
+	
+	[alert setAccessoryView:button];
+	
+	NSInteger result = [alert runModal];
+	
+	if (result == 1)
+	{
+		NSStringEncoding encoding = [[BPEncodingTool sharedTool] encodingForEncodingName:button.selectedItem.title];
+		return encoding;
+	}
+	
+	return 0;
 }
 
 + (void)menuEncodingChanged:(id)sender

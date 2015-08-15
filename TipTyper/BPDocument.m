@@ -74,6 +74,15 @@
 	NSError *error = nil;
 	NSString *string = nil;
 	
+	if ([[url pathExtension] isEqualToString:@"pdf"] || [typeName containsString:@".pdf"])
+	{
+		*outError = [NSError errorWithDomain:@"TypTyper"
+										code:0x1002
+									userInfo:@{NSLocalizedFailureReasonErrorKey:
+												   NSLocalizedString(@"BP_ERROR_FILETYPE", nil)}];
+		return NO;
+	}
+	
 	error = [self checkSizeWithUrl:url];
 	
 	if (error)
@@ -215,6 +224,18 @@
 	}
 }
 
+- (IBAction)pickEncodingAndSave:(id)sender
+{
+	NSStringEncoding encoding = [BPEncodingTool requestEncoding:self.encoding];
+	
+	if (encoding > 0)
+	{
+		_encoding = encoding;
+		
+		[self saveDocument:sender];
+		[self.displayWindow updateEncodingLabel];
+	}
+}
 
 - (void)toggleLinesCounter:(id)sender
 {

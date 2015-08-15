@@ -30,5 +30,6 @@
 - (NSStringEncoding)encodingForEncodingName:(NSString *)name;
 
 + (NSString*)loadStringWithPathAskingForEncoding:(NSURL*)fileURL usedEncoding:(NSStringEncoding*)usedEncoding;
++ (NSStringEncoding)requestEncoding:(NSStringEncoding)oldEncoding;
 
 @end

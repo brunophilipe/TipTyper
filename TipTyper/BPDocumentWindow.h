@@ -47,6 +47,8 @@
 - (void)increaseIndentation:(id)sender;
 - (void)decreaseIndentation:(id)sender;
 
+- (void)updateEncodingLabel;
+
 #pragma mark - IBOutlets
 
 @property (strong) IBOutlet BPBackgroundView   *wrapView;
