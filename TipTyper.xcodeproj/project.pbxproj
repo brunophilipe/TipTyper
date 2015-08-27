@@ -608,7 +608,7 @@
 				INFOPLIST_FILE = "TipTyper-AppStore-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = TipTyper;
-				PROVISIONING_PROFILE = "34f8bbe2-1920-46c1-86b2-1d7588aaf6dc";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -629,7 +629,7 @@
 				INFOPLIST_FILE = "TipTyper-AppStore-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = TipTyper;
-				PROVISIONING_PROFILE = "9dad5ba9-7dae-46cf-aad9-7d1c9d8c0e44";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
