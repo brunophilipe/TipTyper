@@ -61,7 +61,7 @@
 	NSLayoutManager *layoutManager = self.textView.layoutManager;
 	[layoutManager setShowsInvisibleCharacters:NO];
 
-	[self textDidChange:nil];
+	[self updateLabels];
 
 	[self.contentView setNeedsDisplay:YES];
 	[self.lineNumberView setNeedsDisplay:YES];
@@ -180,7 +180,13 @@
 	[self.textView didChangeText];
 }
 
-- (void)textDidChange:(NSNotification *)notification {
+- (void)textDidChange:(NSNotification *)notification
+{
+	[self updateLabels];
+}
+
+- (void)updateLabels
+{
 	[[self.infoView viewWithTag:1] setStringValue:[NSString stringWithFormat:NSLocalizedString(@"BP_LABEL_WORDS", nil),[self.textView.string wordsCount]]];
 	[[self.infoView viewWithTag:3] setStringValue:[NSString stringWithFormat:NSLocalizedString(@"BP_LABEL_LINES", nil),[[self.lineNumberView lineIndices] count]]];
 
@@ -206,7 +212,7 @@
 - (void)updateTextViewContents
 {
 	[self.textView setString:self.document.fileString];
-	[self textDidChange:nil];
+	[self updateLabels];
 
 	[self.undoManager removeAllActions];
 	
