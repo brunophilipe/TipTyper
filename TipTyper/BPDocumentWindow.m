@@ -197,18 +197,6 @@
 	}
 }
 
-- (NSMenu *)textView:(NSTextView *)view menu:(NSMenu *)menu forEvent:(NSEvent *)event atIndex:(NSUInteger)charIndex {
-	NSUInteger i=0;
-	for (NSMenuItem *item in menu.itemArray) {
-		if ([item.title isEqualToString:@"Font"]) {
-			[menu removeItemAtIndex:i];
-			break;
-		}
-		i++;
-	}
-	return menu;
-}
-
 - (void)updateTextViewContents
 {
 	[self.textView setString:self.document.fileString];
@@ -264,7 +252,7 @@
 		}
 	}
 	else
- {
+	{
 		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\n|\r)"
 																			   options:NSRegularExpressionCaseInsensitive error:&error];
 		range = NSMakeRange(0, [regex rangeOfFirstMatchInString:string
@@ -332,7 +320,7 @@
 	}
 	[self.textView setFont:font];
 
-	if ((aux = [defaults objectForKey:kBPDefaultBGCOLOR])) {
+	if ((aux = [defaults objectForKey:kBPDefaultBackgroundColor])) {
 		NSColor *bg = [NSKeyedUnarchiver unarchiveObjectWithData:aux];
 		[self.textView setBackgroundColor:bg];
 		[self.textView setInsertionPointColor:([bg isDarkColor] ? [NSColor lightGrayColor] : [NSColor blackColor])];
@@ -533,6 +521,20 @@
 	}
 
 	[self loadTabSettingsFromDefaults];
+}
+
+#pragma mark - Text Field Delegate
+
+- (NSMenu *)textView:(NSTextView *)view menu:(NSMenu *)menu forEvent:(NSEvent *)event atIndex:(NSUInteger)charIndex {
+	NSUInteger i=0;
+	for (NSMenuItem *item in menu.itemArray) {
+		if ([item.title isEqualToString:@"Font"]) {
+			[menu removeItemAtIndex:i];
+			break;
+		}
+		i++;
+	}
+	return menu;
 }
 
 @end

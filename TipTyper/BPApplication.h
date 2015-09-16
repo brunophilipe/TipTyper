@@ -24,7 +24,7 @@
 
 extern NSString *const kBPDefaultFont;
 extern NSString *const kBPDefaultTextColor;
-extern NSString *const kBPDefaultBGCOLOR;
+extern NSString *const kBPDefaultBackgroundColor;
 extern NSString *const kBPDefaultShowLines;
 extern NSString *const kBPDefaultShowStatus;
 extern NSString *const kBPDefaultInsertTabs;
@@ -42,7 +42,13 @@ extern NSString *const kBPTipTyperWebsite;
 
 @interface BPApplication : NSApplication
 
+/**
+ * Returns YES if the key window has a document associated with it.
+ * Used in Cocoa Bindings.
+ */
 - (BOOL)hasLoadedDocumentInKeyWindow;
+
+#pragma mark - IBActions
 
 /**
  * Checks for updates with Sparkle. (If built for Mac App Store, does nothing).

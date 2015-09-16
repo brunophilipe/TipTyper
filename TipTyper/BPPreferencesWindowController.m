@@ -22,25 +22,42 @@
 #import "BPPreferencesWindowController.h"
 
 typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
-    BP_DEFAULTS_FONT         = (1<<1),
-    BP_DEFAULTS_TXTCOLOR     = (1<<2),
-    BP_DEFAULTS_BGCOLOR      = (1<<3),
-    BP_DEFAULTS_SHOWLINES    = (1<<4),
-    BP_DEFAULTS_SHOWSTATUS   = (1<<5),
-    BP_DEFAULTS_INSERTTABS   = (1<<6),
-    BP_DEFAULTS_TABSIZE      = (1<<7),
-    BP_DEFAULTS_INSERTSPACES = (1<<8),
-    BP_DEFAULTS_COUNTSPACES  = (1<<9),
-    BP_DEFAULTS_EDITORWIDTH  = (1<<10),
-	BP_DEFAULTS_SHOWSPECIALS = (1<<11),
-    BP_DEFAULTS_NONE         = 0
+    BP_Defaults_Font				= (1<<1),
+    BP_Defaults_TxtColor			= (1<<2),
+    BP_Defaults_BgColor				= (1<<3),
+    BP_Defaults_ShowLines			= (1<<4),
+    BP_Defaults_ShowStatus			= (1<<5),
+    BP_Defaults_InsertTabs			= (1<<6),
+    BP_Defaults_TabSize				= (1<<7),
+    BP_Defaults_InsertSpaces		= (1<<8),
+    BP_Defaults_CountSpaces			= (1<<9),
+    BP_Defaults_EditorWidth			= (1<<10),
+	BP_Defaults_ShowSpecials		= (1<<11),
+    BP_Defaults_None				= 0
 };
 
 @interface BPPreferencesWindowController ()
 
 @property BP_DEFAULT_TYPES changedAttributes;
-@property (strong) IBOutlet NSPopover *popover;
 
+@property (strong) NSFont *currentFont;
+@property (strong) NSColor *color_text;
+@property (strong) NSColor *color_bg;
+
+@property (strong) IBOutlet NSPopover	*popover;
+@property (strong) IBOutlet NSTextField	*field_currentFont;
+@property (strong) IBOutlet NSTextField	*textView_example;
+@property (strong) IBOutlet NSTextField	*field_tabSize;
+@property (strong) IBOutlet NSTextField	*field_editorSize;
+@property (strong) IBOutlet NSButton	*checkbox_insertTabs;
+@property (strong) IBOutlet NSButton	*checkbox_insertSpaces;
+@property (strong) IBOutlet NSButton	*checkbox_countSpaces;
+@property (strong) IBOutlet NSButton	*checkbox_showLines;
+@property (strong) IBOutlet NSButton	*checkbox_showStatus;
+@property (strong) IBOutlet NSButton	*checkbox_showInvisibles;
+@property (strong) IBOutlet NSButton	*checkbox_rememberWindowSize;
+@property (strong) IBOutlet NSStepper	*stepper_tabSize;
+@property (strong) IBOutlet NSStepper	*stepper_editorSize;
 
 @end
 
@@ -56,7 +73,7 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	id aux;
 
-	if ((aux = [defaults objectForKey:kBPDefaultBGCOLOR]))
+	if ((aux = [defaults objectForKey:kBPDefaultBackgroundColor]))
 		[self setColor_bg:[NSKeyedUnarchiver unarchiveObjectWithData:aux]];
 	else
 		[self setColor_bg:kBP_TIPTYPER_BGCOLOR];
@@ -136,7 +153,7 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 
 	[self setCustomFont:[fm convertFont:self.currentFont]];
 
-	self.changedAttributes |= BP_DEFAULTS_FONT;
+	self.changedAttributes |= BP_Defaults_Font;
 }
 
 - (void)setCustomFont:(NSFont *)font
@@ -163,7 +180,7 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	[defaults removeObjectForKey:kBPDefaultBGCOLOR];
+	[defaults removeObjectForKey:kBPDefaultBackgroundColor];
 	[defaults removeObjectForKey:kBPDefaultTextColor];
 	[defaults removeObjectForKey:kBPDefaultFont];
 	[defaults removeObjectForKey:kBPDefaultShowStatus];
@@ -177,7 +194,7 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 
 	[defaults synchronize];
 
-	self.changedAttributes = BP_DEFAULTS_NONE;
+	self.changedAttributes = BP_Defaults_None;
 
 	[self configurePreferencesWindow];
 
@@ -188,49 +205,49 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 {
 	switch ([(NSControl *)sender tag]) {
 		case -1: //Show lines
-			self.changedAttributes |= BP_DEFAULTS_SHOWLINES;
+			self.changedAttributes |= BP_Defaults_ShowLines;
 			break;
 
 		case -2: //Show status
-			self.changedAttributes |= BP_DEFAULTS_SHOWSTATUS;
+			self.changedAttributes |= BP_Defaults_ShowStatus;
 			break;
 
 		case -3: //Font color
 			self.color_text = [(NSColorWell *)sender color];
 			[self.textView_example setTextColor:self.color_text];
-			self.changedAttributes |= BP_DEFAULTS_TXTCOLOR;
+			self.changedAttributes |= BP_Defaults_TxtColor;
 			break;
 
 		case -4: //BG color
 			self.color_bg = [(NSColorWell *)sender color];
 			[self.textView_example setBackgroundColor:self.color_bg];
-			self.changedAttributes |= BP_DEFAULTS_BGCOLOR;
+			self.changedAttributes |= BP_Defaults_BgColor;
 			break;
 
 		case -5: //Insert tabs
-			self.changedAttributes |= BP_DEFAULTS_INSERTTABS;
+			self.changedAttributes |= BP_Defaults_InsertTabs;
 			break;
 
 		case -6: //Tab size stepper
 			[self.field_tabSize setIntegerValue:[sender integerValue]];
-			self.changedAttributes |= BP_DEFAULTS_TABSIZE;
+			self.changedAttributes |= BP_Defaults_TabSize;
 			break;
 
 		case -7: //Insert spaces
-			self.changedAttributes |= BP_DEFAULTS_INSERTSPACES;
+			self.changedAttributes |= BP_Defaults_InsertSpaces;
 			break;
 
 		case -8: //Count spaces as chars
-			self.changedAttributes |= BP_DEFAULTS_COUNTSPACES;
+			self.changedAttributes |= BP_Defaults_CountSpaces;
 			break;
 
 		case -9: //Fixed editor width stepper
 			[self.field_editorSize setIntegerValue:[sender integerValue]];
-			self.changedAttributes |= BP_DEFAULTS_EDITORWIDTH;
+			self.changedAttributes |= BP_Defaults_EditorWidth;
 			break;
 
 		case -10: //Count spaces as chars
-			self.changedAttributes |= BP_DEFAULTS_SHOWSPECIALS;
+			self.changedAttributes |= BP_Defaults_ShowSpecials;
 			break;
 
         default:
@@ -242,63 +259,63 @@ typedef NS_ENUM(NSUInteger, BP_DEFAULT_TYPES) {
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	if (self.changedAttributes & BP_DEFAULTS_FONT)
+	if (self.changedAttributes & BP_Defaults_Font)
 	{
 		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.currentFont]
 					 forKey:kBPDefaultFont];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_BGCOLOR)
+	if (self.changedAttributes & BP_Defaults_BgColor)
 	{
 		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.color_bg]
-					 forKey:kBPDefaultBGCOLOR];
+					 forKey:kBPDefaultBackgroundColor];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_TXTCOLOR)
+	if (self.changedAttributes & BP_Defaults_TxtColor)
 	{
 		[defaults setObject:[NSKeyedArchiver archivedDataWithRootObject:self.color_text]
 					 forKey:kBPDefaultTextColor];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_SHOWLINES)
+	if (self.changedAttributes & BP_Defaults_ShowLines)
 	{
 		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_showLines state] == NSOnState)]
 					 forKey:kBPDefaultShowLines];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_SHOWSTATUS)
+	if (self.changedAttributes & BP_Defaults_ShowStatus)
 	{
 		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_showStatus state] == NSOnState)]
 					 forKey:kBPDefaultShowStatus];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_INSERTTABS)
+	if (self.changedAttributes & BP_Defaults_InsertTabs)
 	{
 		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_insertTabs state] == NSOnState)]
 					 forKey:kBPDefaultInsertTabs];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_INSERTSPACES)
+	if (self.changedAttributes & BP_Defaults_InsertSpaces)
 	{
 		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_insertSpaces state] == NSOnState)]
 					 forKey:kBPDefaultInsertSpaces];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_COUNTSPACES)
+	if (self.changedAttributes & BP_Defaults_CountSpaces)
 	{
 		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_countSpaces state] == NSOnState)]
 					 forKey:kBPDefaultCountSpaces];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_TABSIZE)
+	if (self.changedAttributes & BP_Defaults_TabSize)
 	{
 		[defaults setObject:[NSNumber numberWithInteger:[self.field_tabSize integerValue]]
 					 forKey:kBPDefaultTabSize];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_EDITORWIDTH)
+	if (self.changedAttributes & BP_Defaults_EditorWidth)
 	{
 		[defaults setObject:[NSNumber numberWithInteger:[self.field_editorSize integerValue]]
 					 forKey:kBPDefaultEditorWidth];
 	}
-	if (self.changedAttributes & BP_DEFAULTS_SHOWSPECIALS)
+	if (self.changedAttributes & BP_Defaults_ShowSpecials)
 	{
 		[defaults setObject:[NSNumber numberWithBool:([self.checkbox_showInvisibles state] == NSOnState)]
 					 forKey:kBPDefaultShowSpecials];
 	}
 
-	self.changedAttributes = BP_DEFAULTS_NONE;
+	self.changedAttributes = BP_Defaults_None;
 
 	[defaults synchronize];
 	[[NSNotificationCenter defaultCenter] postNotificationName:kBPShouldReloadStyleNotification object:self];
