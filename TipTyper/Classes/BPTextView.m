@@ -224,10 +224,13 @@
 		}
 
 		NSValue *newRange = nil;
-
-		if ([substring hasPrefix:@"\t"] || [substring hasPrefix:@" "]) {
-			newRange = [NSValue valueWithRange:NSMakeRange(currentRange.location, currentRange.length + charactersRemoved)];
-		} else {
+		
+		if ([text characterAtIndex:(currentRange.location - charactersRemovedFirstLine)] == '\n')
+		{
+			newRange = [NSValue valueWithRange:NSMakeRange(currentRange.location, currentRange.length - charactersRemoved)];
+		}
+		else
+		{
 			newRange = [NSValue valueWithRange:NSMakeRange(currentRange.location - charactersRemovedFirstLine, currentRange.length - (charactersRemoved - charactersRemovedFirstLine))];
 		}
 
