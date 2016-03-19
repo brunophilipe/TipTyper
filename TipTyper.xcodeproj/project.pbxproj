@@ -121,8 +121,8 @@
 		15962E811A0C6CB200E168EC /* BPPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BPPreferencesWindowController.h; sourceTree = "<group>"; };
 		15962E821A0C6CB200E168EC /* BPPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BPPreferencesWindowController.m; sourceTree = "<group>"; };
 		159FE91A1B1E8A9C00518435 /* TipTyper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipTyper.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		159FE91B1B1E8A9D00518435 /* TipTyper-AppStore-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TipTyper-AppStore-Info.plist"; path = "/Users/Bruno/Workspace/Release Apps/OS X/TipTyper/TipTyper-AppStore-Info.plist"; sourceTree = "<absolute>"; };
 		159FE91C1B1E8D3000518435 /* TipTyper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TipTyper.entitlements; sourceTree = "<group>"; };
+		15BE26E11C9CE38E000DB4C5 /* TipTyper-AppStore-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TipTyper-AppStore-Info.plist"; sourceTree = "<group>"; };
 		15C21D3618A83D5500C9D410 /* TipTyper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TipTyper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15C21D3918A83D5500C9D410 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		15C21D3C18A83D5500C9D410 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -276,7 +276,7 @@
 				153911AF18E496A9009FAB64 /* Localizable.strings */,
 				1502C2FB18B97B70002EC738 /* dsa_pub.pem */,
 				15C21D4118A83D5500C9D410 /* TipTyper-Info.plist */,
-				159FE91B1B1E8A9D00518435 /* TipTyper-AppStore-Info.plist */,
+				15BE26E11C9CE38E000DB4C5 /* TipTyper-AppStore-Info.plist */,
 				15C21D4518A83D5500C9D410 /* main.m */,
 				15C21D4718A83D5500C9D410 /* TipTyper-Prefix.pch */,
 				15E4929F18A9B1FB004C4901 /* BumpBuild.sh */,
@@ -605,7 +605,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TipTyper/TipTyper-Prefix.pch";
-				INFOPLIST_FILE = "TipTyper-AppStore-Info.plist";
+				INFOPLIST_FILE = "TipTyper/TipTyper-AppStore-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brunophilipe.appstore.TipTyper;
 				PRODUCT_NAME = TipTyper;
@@ -627,7 +627,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TipTyper/TipTyper-Prefix.pch";
-				INFOPLIST_FILE = "TipTyper-AppStore-Info.plist";
+				INFOPLIST_FILE = "TipTyper/TipTyper-AppStore-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.brunophilipe.appstore.TipTyper;
 				PRODUCT_NAME = TipTyper;
