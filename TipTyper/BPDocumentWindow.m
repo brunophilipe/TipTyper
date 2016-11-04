@@ -340,10 +340,6 @@
 		[self.textView setTextColor:kBP_TIPTYPER_TXTCOLOR];
 	}
 
-	if ([self isEditorSetToNarrow]) {
-		[self updateEditorWidthToNarrow:YES];
-	}
-
 	[self loadTabSettingsFromDefaults];
 
 #ifdef DEBUG
@@ -356,21 +352,21 @@
 - (void)updateEditorWidthToNarrow:(BOOL)narrow
 {
     if (narrow)
-    {
-        [self.constraint_scrollViewLeftSpace setPriority:NSLayoutPriorityDefaultHigh];
-        [self.constraint_scrollViewRightSpace setPriority:NSLayoutPriorityDefaultHigh];
-        [self.constraint_scrollViewWidth setPriority:NSLayoutPriorityDefaultLow];
-    }
+	{
+		CGFloat width = [[NSUserDefaults standardUserDefaults] floatForKey:kBPDefaultEditorWidth];
+		if (width < 450) width = 450.f;
+		[self.constraint_scrollViewWidth setConstant:width];
+		[self.constraint_scrollViewLeftSpace setPriority:NSLayoutPriorityDefaultLow];
+		[self.constraint_scrollViewRightSpace setPriority:NSLayoutPriorityDefaultLow];
+		[self.constraint_scrollViewWidth setPriority:NSLayoutPriorityDefaultHigh];
+		[self setLinesCounterVisible:NO];
+	}
     else
-    {
-        CGFloat width = [[NSUserDefaults standardUserDefaults] floatForKey:kBPDefaultEditorWidth];
-        if (width < 400) width = 450.f;
-        [self.constraint_scrollViewWidth setConstant:width];
-        [self.constraint_scrollViewLeftSpace setPriority:NSLayoutPriorityDefaultLow];
-        [self.constraint_scrollViewRightSpace setPriority:NSLayoutPriorityDefaultLow];
-        [self.constraint_scrollViewWidth setPriority:NSLayoutPriorityDefaultHigh];
-        [self setLinesCounterVisible:NO];
-    }
+	{
+		[self.constraint_scrollViewLeftSpace setPriority:NSLayoutPriorityDefaultHigh];
+		[self.constraint_scrollViewRightSpace setPriority:NSLayoutPriorityDefaultHigh];
+		[self.constraint_scrollViewWidth setPriority:NSLayoutPriorityDefaultLow];
+	}
 }
 
 - (BOOL)isEditorSetToNarrow
@@ -400,12 +396,14 @@
 	}
 }
 
-- (IBAction)action_switch_editorSpacing:(id)sender {
+- (IBAction)action_switch_editorSpacing:(id)sender
+{
 	NSSegmentedControl *toggle = sender;
 	[self updateEditorWidthToNarrow:(toggle.selectedSegment == 1)];
 }
 
-- (IBAction)action_switch_indentation:(id)sender {
+- (IBAction)action_switch_indentation:(id)sender
+{
 	NSSegmentedControl *toggler = sender;
 
 	switch (toggler.selectedSegment) {
@@ -422,7 +420,8 @@
 	}
 }
 
-- (IBAction)action_toggle_displayOptions:(id)sender {
+- (IBAction)action_toggle_displayOptions:(id)sender
+{
 	NSSegmentedControl *toggler = sender;
 
 	switch (toggler.selectedSegment) {
@@ -439,11 +438,13 @@
 	}
 }
 
-- (IBAction)action_switch_displayInvisibles:(id)sender {
+- (IBAction)action_switch_displayInvisibles:(id)sender
+{
 	[self toggleInvisibles];
 }
 
-- (IBAction)action_showJumpToLineDialog:(id)sender {
+- (IBAction)action_showJumpToLineDialog:(id)sender
+{
 	NSAlert		*alert;
 	NSTextField *field;
 	
@@ -468,7 +469,8 @@
 	}
 }
 
-- (IBAction)action_switch_changeFontSize:(id)sender {
+- (IBAction)action_switch_changeFontSize:(id)sender
+{
 	NSSegmentedControl *toggle = sender;
 
 	switch (toggle.selectedSegment) {
