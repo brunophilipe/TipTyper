@@ -112,6 +112,11 @@
 	[self.tb_toggle_displayOptions setSelected:flag forSegment:0];
 }
 
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)setInfoViewVisible:(BOOL)flag
 {
 	if (flag) { //Should become visible

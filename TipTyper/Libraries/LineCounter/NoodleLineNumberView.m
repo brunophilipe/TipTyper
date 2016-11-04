@@ -75,8 +75,6 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    
 }
 
 - (void)setFont:(NSFont *)aFont
