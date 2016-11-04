@@ -74,12 +74,15 @@
 	NSError *error = nil;
 	NSString *string = nil;
 	
-	if ([[url pathExtension] isEqualToString:@"pdf"] || [typeName containsString:@".pdf"])
+	if ([[url pathExtension] isEqualToString:@"pdf"] || [typeName rangeOfString:@".pdf"].location != NSNotFound)
 	{
-		*outError = [NSError errorWithDomain:@"TypTyper"
-										code:0x1002
-									userInfo:@{NSLocalizedFailureReasonErrorKey:
-												   NSLocalizedString(@"BP_ERROR_FILETYPE", nil)}];
+		if (*outError != nil)
+		{
+			*outError = [NSError errorWithDomain:@"TypTyper"
+											code:0x1002
+										userInfo:@{NSLocalizedFailureReasonErrorKey:
+													   NSLocalizedString(@"BP_ERROR_FILETYPE", nil)}];
+		}
 		return NO;
 	}
 	
