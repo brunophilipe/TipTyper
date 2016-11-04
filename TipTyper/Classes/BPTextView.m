@@ -189,7 +189,8 @@
 	NSMutableArray *ranges = [[self selectedRanges] mutableCopy];
 	NSUInteger totalCharactersRemoved = 0;
 
-	for (NSUInteger rangeIndex = 0; rangeIndex < ranges.count; rangeIndex++) {
+	for (NSUInteger rangeIndex = 0; rangeIndex < ranges.count; rangeIndex++)
+	{
 		NSRange currentRange = [[ranges objectAtIndex:rangeIndex] rangeValue];
 		NSUInteger charactersRemoved = 0, charactersRemovedFirstLine = 0;
 
@@ -223,18 +224,40 @@
 				charactersRemovedFirstLine = charactersRemoved;
 		}
 
-		NSValue *newRange = nil;
-		
-		if ([text characterAtIndex:(currentRange.location - charactersRemovedFirstLine)] == '\n')
+		NSRange newRange;
+
+		if (currentRange.location == 0)
 		{
-			newRange = [NSValue valueWithRange:NSMakeRange(currentRange.location, currentRange.length - charactersRemoved)];
+			if (currentRange.length == 0)
+			{
+				newRange = currentRange;
+			}
+			else if (currentRange.length < charactersRemoved)
+			{
+				newRange = NSMakeRange(currentRange.location, 0);
+			}
+			else
+			{
+				newRange = NSMakeRange(currentRange.location, currentRange.length - charactersRemoved);
+			}
+		}
+		else if ([text characterAtIndex:(currentRange.location - charactersRemovedFirstLine)] == '\n')
+		{
+			if (currentRange.length == 0)
+			{
+				newRange = NSMakeRange(currentRange.location - charactersRemoved, currentRange.length);
+			}
+			else
+			{
+				newRange = NSMakeRange(currentRange.location, currentRange.length - charactersRemoved);
+			}
 		}
 		else
 		{
-			newRange = [NSValue valueWithRange:NSMakeRange(currentRange.location - charactersRemovedFirstLine, currentRange.length - (charactersRemoved - charactersRemovedFirstLine))];
+			newRange = NSMakeRange(currentRange.location - charactersRemovedFirstLine, currentRange.length - (charactersRemoved - charactersRemovedFirstLine));
 		}
 
-		[ranges replaceObjectAtIndex:rangeIndex withObject:newRange];
+		[ranges replaceObjectAtIndex:rangeIndex withObject:[NSValue valueWithRange:newRange]];
 
 		totalCharactersRemoved += charactersRemoved;
 	}
