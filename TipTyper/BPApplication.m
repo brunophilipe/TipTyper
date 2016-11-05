@@ -48,6 +48,7 @@ NSString *const kBPTipTyperWebsite = @"https://www.brunophilipe.com/software/tip
 @interface BPApplication () <NSWindowDelegate>
 
 @property (strong) IBOutlet  NSMenuItem *checkForUpdateButton;
+@property (strong) IBOutlet NSMenu *menuBarWindowMenu;
 
 @end
 
@@ -79,6 +80,28 @@ NSString *const kBPTipTyperWebsite = @"https://www.brunophilipe.com/software/tip
 #else
 	[self.checkForUpdateButton setHidden:YES];
 #endif
+
+	[self setupNewTabMenuItem];
+}
+
+- (void)setupNewTabMenuItem
+{
+	if ([[NSWindow class] respondsToSelector:@selector(allowsAutomaticWindowTabbing)])
+	{
+
+		NSMenuItem *menuItem = [[NSMenuItem alloc] initWithTitle:NSLocalizedString(@"BP_NEW_TAB_MENU", nil)
+														  action:@selector(createNewTab:)
+												   keyEquivalent:@"t"];
+
+		[menuItem setKeyEquivalentModifierMask:NSEventModifierFlagCommand];
+
+		NSInteger index = [[self menuBarWindowMenu] indexOfItemWithTag:1337];
+
+		if (index != NSNotFound)
+		{
+			[[self menuBarWindowMenu] insertItem:menuItem atIndex:index+1];
+		}
+	}
 }
 
 - (IBAction)checkForUpdate:(id)sender
@@ -104,6 +127,47 @@ NSString *const kBPTipTyperWebsite = @"https://www.brunophilipe.com/software/tip
 	}
 
 	[prefWindowController performSelector:@selector(showWindow:) withObject:self afterDelay:0.2];
+}
+
+- (IBAction)createNewTab:(id)sender
+{
+	NSError *error = nil;
+	BPDocumentWindow *keyWindow = nil;
+
+	if ([[NSApp keyWindow] isKindOfClass:[BPDocumentWindow class]])
+	{
+		keyWindow = (BPDocumentWindow*)[NSApp keyWindow];
+
+		NSDocumentController *controller = [NSDocumentController sharedDocumentController];
+		NSDocument *document = [controller makeUntitledDocumentOfType:@"public.plain-text"
+																error:&error];
+
+		if (document && [document isKindOfClass:[BPDocument class]])
+		{
+			BPDocument *newDocument = (BPDocument*)document;
+			[newDocument makeWindowControllers];
+
+			for (NSWindowController *controller in [newDocument windowControllers])
+			{
+				[controller window];
+			}
+
+			BPDocumentWindow *documentWindow = [newDocument displayWindow];
+
+			[keyWindow addTabbedWindow:documentWindow ordered:NSWindowAbove];
+
+			[documentWindow orderFront:sender];
+			[documentWindow makeKeyWindow];
+		}
+		else if (error)
+		{
+			[[BPApplication sharedApplication] presentError:error modalForWindow:keyWindow delegate:nil didPresentSelector:nil contextInfo:nil];
+		}
+		else
+		{
+			NSLog(@"Error! Could not create new document??");
+		}
+	}
 }
 
 - (void)verifyExecutableChecksum

@@ -53,6 +53,8 @@
     NSColor				*textColor;
     NSColor				*alternateTextColor;
     NSColor				*backgroundColor;
+
+	NSParagraphStyle	*lineNumbersParagraphStyle;
 }
 
 - (id)initWithScrollView:(NSScrollView *)aScrollView
@@ -60,7 +62,8 @@
     if ((self = [super initWithScrollView:aScrollView orientation:NSVerticalRuler]) != nil)
     {
 		linesToMarkers = [[NSMutableDictionary alloc] init];
-		
+		lineNumbersParagraphStyle = [NSParagraphStyle defaultParagraphStyle];
+
         [self setClientView:[aScrollView documentView]];
     }
     return self;
@@ -69,6 +72,7 @@
 - (void)awakeFromNib
 {
 	linesToMarkers = [[NSMutableDictionary alloc] init];
+	lineNumbersParagraphStyle = [NSParagraphStyle defaultParagraphStyle];
 	[self setClientView:[[self scrollView] documentView]];
 }
 
@@ -324,20 +328,38 @@
     return left;
 }
 
+- (NSParagraphStyle*)paragraphStyle
+{
+	NSMutableParagraphStyle *style = [lineNumbersParagraphStyle mutableCopy];
+
+	if ([self usesRTL])
+	{
+		[style setAlignment:NSTextAlignmentLeft];
+	}
+	else
+	{
+		[style setAlignment:NSTextAlignmentRight];
+	}
+
+	return style;
+}
+
 - (NSDictionary *)textAttributes
 {
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-            [self font], NSFontAttributeName, 
-            [self textColor], NSForegroundColorAttributeName,
-            nil];
+	return @{
+			 NSFontAttributeName: [self font],
+			 NSForegroundColorAttributeName: [self textColor],
+			 NSParagraphStyleAttributeName: [self paragraphStyle]
+			 };
 }
 
 - (NSDictionary *)markerTextAttributes
 {
-	    return [NSDictionary dictionaryWithObjectsAndKeys:
-            [self font], NSFontAttributeName, 
-            [self alternateTextColor], NSForegroundColorAttributeName,
-				nil];
+	return @{
+			 NSFontAttributeName: [self font],
+			 NSForegroundColorAttributeName: [self alternateTextColor],
+			 NSParagraphStyleAttributeName: [self paragraphStyle]
+			 };
 }
 
 - (CGFloat)requiredThickness
@@ -364,6 +386,11 @@
     return ceilf(MAX(DEFAULT_THICKNESS, stringSize.width + RULER_MARGIN * 2));
 }
 
+- (BOOL)usesRTL
+{
+	return [NSApp userInterfaceLayoutDirection] == NSUserInterfaceLayoutDirectionRightToLeft;
+}
+
 - (void)drawHashMarksAndLabelsInRect:(NSRect)aRect
 {
     id			view;
@@ -375,11 +402,19 @@
 	{
 		[backgroundColor set];
 		NSRectFill(bounds);
-		
-		[[NSColor colorWithCalibratedWhite:0.58 alpha:1.0] set];
-		[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMaxX(bounds) - 0/5, NSMinY(bounds)) toPoint:NSMakePoint(NSMaxX(bounds) - 0.5, NSMaxY(bounds))];
 	}
-	
+
+	[[NSColor colorWithCalibratedWhite:0.58 alpha:1.0] setStroke];
+
+	if (![self usesRTL])
+	{
+		[NSBezierPath strokeLineFromPoint:NSMakePoint(NSMaxX(bounds) - 0.5, NSMinY(bounds)) toPoint:NSMakePoint(NSMaxX(bounds) - 0.5, NSMaxY(bounds))];
+	}
+	else
+	{
+		[NSBezierPath strokeLineFromPoint:NSMakePoint(0.5, NSMinY(bounds)) toPoint:NSMakePoint(0.5, NSMaxY(bounds))];
+	}
+
     view = [self clientView];
 	
     if ([view isKindOfClass:[NSTextView class]])
@@ -465,13 +500,12 @@
 					{
 						currentTextAttributes = [self markerTextAttributes];
 					}
-					
-                    // Draw string flush right, centered vertically within the line
-                    [labelText drawInRect:
-                       NSMakeRect(NSWidth(bounds) - stringSize.width - RULER_MARGIN,
-                                  ypos + (NSHeight(rects[0]) - stringSize.height) / 2.0,
-                                  NSWidth(bounds) - RULER_MARGIN * 2.0, NSHeight(rects[0]))
-                           withAttributes:currentTextAttributes];
+
+					[labelText drawInRect:
+						   NSMakeRect(RULER_MARGIN,
+									  ypos + (NSHeight(rects[0]) - stringSize.height) / 2.0,
+									  NSWidth(bounds) - RULER_MARGIN * 2.0, NSHeight(rects[0]))
+							   withAttributes:currentTextAttributes];
                 }
             }
 			if (index > NSMaxRange(range))

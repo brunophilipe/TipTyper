@@ -78,7 +78,7 @@
 	{
 		if (*outError != nil)
 		{
-			*outError = [NSError errorWithDomain:@"TypTyper"
+			*outError = [NSError errorWithDomain:@"TipTyper"
 											code:0x1002
 										userInfo:@{NSLocalizedFailureReasonErrorKey:
 													   NSLocalizedString(@"BP_ERROR_FILETYPE", nil)}];

@@ -25,3 +25,5 @@
 "BP_ERROR_ENCODING_NOFILE"	= "No file is open in TipTyper. Unexpected error. Please report this as a bug.";
 "BP_ERROR_FILESIZE"			= "TipTyper doesn't support files greater than 500MB.";
 "BP_ERROR_FILETYPE"			= "TipTyper doesn't support files of this type.";
+
+"BP_NEW_TAB_MENU"			= "New Tab";
