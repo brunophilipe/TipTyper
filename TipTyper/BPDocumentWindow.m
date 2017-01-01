@@ -103,7 +103,7 @@
 
 - (void)scrollViewDidScroll:(NSNotification *)notif
 {
-	[self.scrollView setNeedsDisplay:YES];
+	[self.scrollView.verticalRulerView setNeedsDisplay:YES];
 }
 
 - (void)setLinesCounterVisible:(BOOL)flag
@@ -372,6 +372,16 @@
 - (BOOL)isEditorSetToNarrow
 {
 	return [self.constraint_scrollViewWidth priority] == NSLayoutPriorityDefaultHigh;
+}
+
+- (void)setFrame:(NSRect)frameRect display:(BOOL)flag
+{
+	[super setFrame:frameRect display:flag];
+
+	if (flag)
+	{
+		[self.scrollView.verticalRulerView setNeedsDisplay:YES];
+	}
 }
 
 #pragma mark - IBActions
