@@ -24,6 +24,8 @@
 
 #define kBP_KEYCODE_RETURN 36
 
+static NSTouchBarItemIdentifier BPTouchBarForTextFieldIdentifier = @"com.brunophilipe.TipTyper.TouchBar.BPTextField";
+
 @interface BPTextView ()
 
 @end
@@ -301,10 +303,11 @@
 
 		NSTouchBar *bar = [[NSTouchBar alloc] init];
 
-		bar.delegate = window;
+		[bar setDelegate:window];
 
 		// Set the default ordering of items.
-		bar.defaultItemIdentifiers = [window defaultTouchBarIdentifiers];
+		[bar setDefaultItemIdentifiers:[window defaultTouchBarIdentifiers]];
+		[bar setCustomizationIdentifier: BPTouchBarForTextFieldIdentifier];
 
 		return bar;
 	}

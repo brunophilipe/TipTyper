@@ -25,8 +25,8 @@
 #import "NSColor+Luminance.h"
 #import "BPEncodingTool.h"
 
-static NSTouchBarItemIdentifier BPTouchbarItemIndentationIdentifier = @"com.brunophilipe.TipTyper.Document.Indentation";
-static NSTouchBarItemIdentifier BPTouchbarItemGoToLineIdentifier = @"com.brunophilipe.TipTyper.Document.GoToLine";
+static NSTouchBarItemIdentifier BPTouchBarItemIndentationIdentifier = @"com.brunophilipe.TipTyper.Document.Indentation";
+static NSTouchBarItemIdentifier BPTouchBarItemGoToLineIdentifier = @"com.brunophilipe.TipTyper.Document.GoToLine";
 
 @interface BPDocumentWindow ()
 
@@ -558,8 +558,8 @@ static NSTouchBarItemIdentifier BPTouchbarItemGoToLineIdentifier = @"com.brunoph
 - (NSArray<NSTouchBarItemIdentifier>*)defaultTouchBarIdentifiers
 {
 	return @[
-	  BPTouchbarItemIndentationIdentifier,
-	  BPTouchbarItemGoToLineIdentifier,
+	  BPTouchBarItemIndentationIdentifier,
+	  BPTouchBarItemGoToLineIdentifier,
 	  NSTouchBarItemIdentifierOtherItemsProxy
 	  ];
 }
@@ -570,7 +570,7 @@ static NSTouchBarItemIdentifier BPTouchbarItemGoToLineIdentifier = @"com.brunoph
 
 - (NSTouchBarItem*)touchBar:(NSTouchBar *)touchBar makeItemForIdentifier:(NSTouchBarItemIdentifier)identifier
 {
-	if ([identifier isEqualToString:BPTouchbarItemIndentationIdentifier])
+	if ([identifier isEqualToString:BPTouchBarItemIndentationIdentifier])
 	{
 		NSArray<NSImage *> *images = @[
 			[NSImage imageNamed:@"indentDecreaseTemplate"],
@@ -584,16 +584,19 @@ static NSTouchBarItemIdentifier BPTouchbarItemGoToLineIdentifier = @"com.brunoph
 																			  action:@selector(action_switch_indentation:)];
 
 		[item setView:control];
+		[item setCustomizationLabel:@"Change Indentation"];
 
 		return item;
 	}
-	else if ([identifier isEqualToString:BPTouchbarItemGoToLineIdentifier])
+	else if ([identifier isEqualToString:BPTouchBarItemGoToLineIdentifier])
 	{
 		NSCustomTouchBarItem *item = [[NSCustomTouchBarItem alloc] initWithIdentifier:identifier];
 		NSButton *button = [NSButton buttonWithImage:[NSImage imageNamed:@"jumpToLineTemplate"]
 											  target:self
 											  action:@selector(action_showJumpToLineDialog:)];
 		[item setView:button];
+		[item setCustomizationLabel:@"Jump to Line"];
+
 		return item;
 	}
 	else

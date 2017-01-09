@@ -174,12 +174,12 @@
                             <action selector="action_switch_editorSpacing:" target="xOd-HO-29H" id="9zO-n0-uEp"/>
                         </connections>
                     </toolbarItem>
-                    <toolbarItem implicitItemIdentifier="A119BD28-A8E3-4ECC-B2BE-F88D24CCCDA3" label="Indentation" paletteLabel="Indentation" id="Zc5-wC-gFw">
+                    <toolbarItem implicitItemIdentifier="A119BD28-A8E3-4ECC-B2BE-F88D24CCCDA3" label="Indentation" paletteLabel="Change Indentation" id="Zc5-wC-gFw">
                         <nil key="toolTip"/>
                         <size key="minSize" width="67" height="28"/>
                         <size key="maxSize" width="67" height="28"/>
                         <segmentedControl key="view" verticalHuggingPriority="750" id="EXc-pY-i9E">
-                            <rect key="frame" x="0.0" y="14" width="67" height="28"/>
+                            <rect key="frame" x="22" y="14" width="67" height="28"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="momentary" id="SIy-ZQ-lh8">
                                 <font key="font" metaFont="system"/>
