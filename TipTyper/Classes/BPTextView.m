@@ -241,7 +241,8 @@
 				newRange = NSMakeRange(currentRange.location, currentRange.length - charactersRemoved);
 			}
 		}
-		else if ([text length] != 0 && [text characterAtIndex:(currentRange.location - charactersRemovedFirstLine)] == '\n')
+		else if (currentRange.location - charactersRemovedFirstLine < [text length]
+				 && [text characterAtIndex:(currentRange.location - charactersRemovedFirstLine)] == '\n')
 		{
 			if (currentRange.length == 0)
 			{
