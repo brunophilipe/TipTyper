@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment version="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11762"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -328,18 +328,19 @@
                 </defaultToolbarItems>
             </toolbar>
             <connections>
+                <outlet property="changeIndentationSegmentedControl" destination="EXc-pY-i9E" id="QSs-ON-ISN"/>
                 <outlet property="constraint_backgroundViewBottomSpace" destination="DRZ-a0-o3x" id="BjY-JG-UnZ"/>
                 <outlet property="constraint_scrollViewLeftSpace" destination="TZx-7M-FKg" id="UxQ-zX-bXd"/>
                 <outlet property="constraint_scrollViewRightSpace" destination="Mhi-CB-OwF" id="SKT-eN-fPo"/>
                 <outlet property="constraint_scrollViewWidth" destination="6jx-ga-dOH" id="l5P-bL-pvB"/>
                 <outlet property="delegate" destination="-3" id="xpP-Y0-eu5"/>
+                <outlet property="displayInvisiblesSegmentedControl" destination="Gyi-xg-Qtu" id="1NQ-Pf-VUF"/>
+                <outlet property="displayOptionsSegmentedControl" destination="Oeq-YK-g6i" id="gMe-EX-Vg5"/>
+                <outlet property="editToolbarToolbarItem" destination="azi-cE-2q8" id="UFp-hO-zn3"/>
+                <outlet property="editorSpacingSegmentedControl" destination="gR5-7Z-XjY" id="GMC-HH-GBI"/>
                 <outlet property="infoView" destination="OgU-xF-SWb" id="Fqd-g2-lFV"/>
                 <outlet property="scrollView" destination="g04-bm-jeK" id="cnJ-2s-epd"/>
-                <outlet property="tb_bt_editToolbar" destination="azi-cE-2q8" id="g8b-x6-ygh"/>
-                <outlet property="tb_switch_displayInvisibles" destination="Gyi-xg-Qtu" id="YDp-UP-6iV"/>
-                <outlet property="tb_switch_editorSpacing" destination="gR5-7Z-XjY" id="JSb-OF-8vm"/>
-                <outlet property="tb_switch_textAlignment" destination="uJc-8d-45l" id="0kp-RE-qxs"/>
-                <outlet property="tb_toggle_displayOptions" destination="Oeq-YK-g6i" id="5tg-is-I1z"/>
+                <outlet property="textAlignmentSegmentedControl" destination="uJc-8d-45l" id="JP9-pD-Jwg"/>
                 <outlet property="textView" destination="M3O-FW-PWT" id="21L-hD-zIv"/>
                 <outlet property="wrapView" destination="ZcX-Ih-faG" id="gvK-SY-ukC"/>
             </connections>

@@ -109,7 +109,7 @@
 - (void)setLinesCounterVisible:(BOOL)flag
 {
 	[self.scrollView setRulersVisible:flag];
-	[self.tb_toggle_displayOptions setSelected:flag forSegment:0];
+	[self.displayOptionsSegmentedControl setSelected:flag forSegment:0];
 }
 
 - (void)dealloc
@@ -125,13 +125,14 @@
 		[self.constraint_backgroundViewBottomSpace setConstant:0.f];
 	}
 	[(NSView*)self.contentView setNeedsDisplay:YES];
-	[self.tb_toggle_displayOptions setSelected:flag forSegment:1];
+	[self.displayOptionsSegmentedControl setSelected:flag forSegment:1];
 }
 
 - (void)setDisplayingInvisibles:(BOOL)displayingInvisibles
 {
 	_displayingInvisibles = displayingInvisibles;
-	[self.tb_switch_displayInvisibles setSelected:_displayingInvisibles forSegment:0];
+	[self.displayInvisiblesSegmentedControl setSelected:_displayingInvisibles
+											 forSegment:0];
 	[self.textView setNeedsDisplay:YES];
 }
 

@@ -55,11 +55,12 @@
 @property (strong) IBOutlet NSScrollView       *scrollView;
 @property (strong) IBOutlet BPTextView         *textView;
 @property (strong) IBOutlet NSView             *infoView;
-@property (strong) IBOutlet NSSegmentedControl *tb_switch_textAlignment;
-@property (strong) IBOutlet NSSegmentedControl *tb_switch_editorSpacing;
-@property (strong) IBOutlet NSSegmentedControl *tb_switch_displayInvisibles;
-@property (strong) IBOutlet NSSegmentedControl *tb_toggle_displayOptions;
-@property (strong) IBOutlet NSToolbarItem      *tb_bt_editToolbar;
+@property (strong) IBOutlet NSSegmentedControl *textAlignmentSegmentedControl;
+@property (strong) IBOutlet NSSegmentedControl *editorSpacingSegmentedControl;
+@property (strong) IBOutlet NSSegmentedControl *displayInvisiblesSegmentedControl;
+@property (strong) IBOutlet NSSegmentedControl *changeIndentationSegmentedControl;
+@property (strong) IBOutlet NSSegmentedControl *displayOptionsSegmentedControl;
+@property (strong) IBOutlet NSToolbarItem      *editToolbarToolbarItem;
 
 #pragma mark - IBActions
 
