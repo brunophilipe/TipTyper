@@ -25,6 +25,9 @@
 #import "NSColor+Luminance.h"
 #import "BPEncodingTool.h"
 
+static NSTouchBarItemIdentifier BPTouchbarItemIndentationIdentifier = @"com.brunophilipe.TipTyper.Document.Indentation";
+static NSTouchBarItemIdentifier BPTouchbarItemGoToLineIdentifier = @"com.brunophilipe.TipTyper.Document.GoToLine";
+
 @interface BPDocumentWindow ()
 
 @property (strong) NoodleLineNumberView *lineNumberView;
@@ -223,7 +226,8 @@
 	NSUInteger __block curLine = 1;
 	NSError *error;
 
-	if (line > 1) {
+	if (line > 1)
+	{
 		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\n|\r|\r\n)"
 																			   options:NSRegularExpressionCaseInsensitive
 																				 error:&error];
@@ -233,8 +237,10 @@
 								  range:NSMakeRange(0, string.length)
 							 usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop)
 		{
-			if (result.resultType == NSTextCheckingTypeRegularExpression) {
-				if (curLine == line) {
+			if (result.resultType == NSTextCheckingTypeRegularExpression)
+			{
+				if (curLine == line)
+				{
 					range = NSMakeRange(lastRange.location+1, result.range.location-lastRange.location);
 					*stop = YES;
 				}
@@ -243,24 +249,13 @@
 			}
 		}];
 
-		if (range.location == 0 && range.length == 0)
-		{
-			NSAlert *alert = [NSAlert alertWithMessageText:@"Attention!"
-											 defaultButton:@"OK"
-										   alternateButton:nil
-											   otherButton:nil
-								 informativeTextWithFormat:@"There is no such line!"];
-			
-			[alert setAlertStyle:NSWarningAlertStyle];
-			[alert.window setTitle:@"TipTyper"];
-			[alert runModal];
-			return;
-		}
+		range = NSMakeRange(lastRange.location+1, [string length] - (lastRange.location+1));
 	}
 	else
 	{
 		NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"(\n|\r)"
-																			   options:NSRegularExpressionCaseInsensitive error:&error];
+																			   options:NSRegularExpressionCaseInsensitive
+																				 error:&error];
 		range = NSMakeRange(0, [regex rangeOfFirstMatchInString:string
 														options:0
 														  range:NSMakeRange(0, string.length)].location+1);
@@ -464,8 +459,10 @@
 	[alert setAccessoryView:field];
 	[alert setAlertStyle:NSInformationalAlertStyle];
 	
-	void (^completion)(NSInteger returnCode) = ^(NSInteger returnCode) {
-		if (returnCode == 1) {
+	void (^completion)(NSInteger returnCode) = ^(NSInteger returnCode)
+	{
+		if (returnCode == 1)
+		{
 			[self goToLine:MAX(1, (NSUInteger)field.integerValue)];
 		}
 	};
@@ -473,6 +470,7 @@
 	if ([alert respondsToSelector:@selector(beginSheetModalForWindow:completionHandler:)])
 	{
 		[alert beginSheetModalForWindow:self completionHandler:completion];
+		[field becomeFirstResponder];
 	}
 	else
 	{
@@ -553,6 +551,55 @@
 		i++;
 	}
 	return menu;
+}
+
+#pragma mark - Touch Bar Delegate
+
+- (NSArray<NSTouchBarItemIdentifier>*)defaultTouchBarIdentifiers
+{
+	return @[
+	  BPTouchbarItemIndentationIdentifier,
+	  BPTouchbarItemGoToLineIdentifier,
+	  NSTouchBarItemIdentifierOtherItemsProxy
+	  ];
+}
+
+@end
+
+@implementation BPDocumentWindow (TouchBarHelpers)
+
+- (NSTouchBarItem*)touchBar:(NSTouchBar *)touchBar makeItemForIdentifier:(NSTouchBarItemIdentifier)identifier
+{
+	if ([identifier isEqualToString:BPTouchbarItemIndentationIdentifier])
+	{
+		NSArray<NSImage *> *images = @[
+			[NSImage imageNamed:@"indentDecreaseTemplate"],
+			[NSImage imageNamed:@"indentIncreaseTemplate"]
+		];
+
+		NSCustomTouchBarItem *item = [[NSCustomTouchBarItem alloc] initWithIdentifier:identifier];
+		NSSegmentedControl *control = [NSSegmentedControl segmentedControlWithImages:images
+																		trackingMode:NSSegmentSwitchTrackingMomentary
+																			  target:self
+																			  action:@selector(action_switch_indentation:)];
+
+		[item setView:control];
+
+		return item;
+	}
+	else if ([identifier isEqualToString:BPTouchbarItemGoToLineIdentifier])
+	{
+		NSCustomTouchBarItem *item = [[NSCustomTouchBarItem alloc] initWithIdentifier:identifier];
+		NSButton *button = [NSButton buttonWithImage:[NSImage imageNamed:@"jumpToLineTemplate"]
+											  target:self
+											  action:@selector(action_showJumpToLineDialog:)];
+		[item setView:button];
+		return item;
+	}
+	else
+	{
+		return nil;
+	}
 }
 
 @end

@@ -68,6 +68,11 @@ NSString *const kBPTipTyperWebsite = @"https://www.brunophilipe.com/software/tip
 				   [keyWindow isMemberOfClass:[BPDocumentWindow class]] &&
 				   [[keyWindow document] isLoadedFromFile]);
 	
+	if ([self respondsToSelector:@selector(setAutomaticCustomizeTouchBarMenuItemEnabled:)])
+	{
+		[self setAutomaticCustomizeTouchBarMenuItemEnabled:YES];
+	}
+
 	return status;
 }
 

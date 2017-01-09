@@ -287,14 +287,29 @@
 		return 1;
 	} else if (spaces > 0) {
 		[self insertText:@"" replacementRange:NSMakeRange(location, MIN(spaces, self.tabSize))];
-
-//		if (spareSpaces != NULL) {
-//			*spareSpaces = spaces;
-//		}
 		return spaces;
 	}
 
 	return 0;
+}
+
+- (NSTouchBar*)makeTouchBar
+{
+	if ([[self window] isKindOfClass:[BPDocumentWindow class]])
+	{
+		BPDocumentWindow *window = (BPDocumentWindow*)[self window];
+
+		NSTouchBar *bar = [[NSTouchBar alloc] init];
+
+		bar.delegate = window;
+
+		// Set the default ordering of items.
+		bar.defaultItemIdentifiers = [window defaultTouchBarIdentifiers];
+
+		return bar;
+	}
+
+	return nil;
 }
 
 @end

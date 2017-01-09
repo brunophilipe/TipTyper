@@ -27,7 +27,7 @@
 @class BPDocument;
 @class BPTextView;
 
-@interface BPDocumentWindow : NSWindow <NSTextViewDelegate>
+@interface BPDocumentWindow : NSWindow <NSTextViewDelegate, NSTouchBarDelegate>
 
 @property (assign) BPDocument *document;
 
@@ -49,18 +49,21 @@
 
 - (void)updateEncodingLabel;
 
+- (NSArray<NSTouchBarItemIdentifier>*)defaultTouchBarIdentifiers;
+
 #pragma mark - IBOutlets
 
-@property (strong) IBOutlet BPBackgroundView   *wrapView;
-@property (strong) IBOutlet NSScrollView       *scrollView;
-@property (strong) IBOutlet BPTextView         *textView;
-@property (strong) IBOutlet NSView             *infoView;
-@property (strong) IBOutlet NSSegmentedControl *textAlignmentSegmentedControl;
-@property (strong) IBOutlet NSSegmentedControl *editorSpacingSegmentedControl;
-@property (strong) IBOutlet NSSegmentedControl *displayInvisiblesSegmentedControl;
-@property (strong) IBOutlet NSSegmentedControl *changeIndentationSegmentedControl;
-@property (strong) IBOutlet NSSegmentedControl *displayOptionsSegmentedControl;
-@property (strong) IBOutlet NSToolbarItem      *editToolbarToolbarItem;
+@property (strong) IBOutlet BPBackgroundView	*wrapView;
+@property (strong) IBOutlet NSScrollView		*scrollView;
+@property (strong) IBOutlet BPTextView			*textView;
+@property (strong) IBOutlet NSView				*infoView;
+@property (strong) IBOutlet NSSegmentedControl	*textAlignmentSegmentedControl;
+@property (strong) IBOutlet NSSegmentedControl	*editorSpacingSegmentedControl;
+@property (strong) IBOutlet NSSegmentedControl	*displayInvisiblesSegmentedControl;
+@property (strong) IBOutlet NSSegmentedControl	*changeIndentationSegmentedControl;
+@property (strong) IBOutlet NSSegmentedControl	*displayOptionsSegmentedControl;
+@property (strong) IBOutlet NSButton			*goToLineButton;
+@property (strong) IBOutlet NSToolbarItem		*editToolbarToolbarItem;
 
 #pragma mark - IBActions
 
