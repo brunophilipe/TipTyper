@@ -85,8 +85,8 @@
     
     // Draw info view
     self.infoView.wantsLayer = YES;
-    self.infoView.layer.backgroundColor = [NSColor whiteColor].CGColor;
-    
+	self.infoView.layer.backgroundColor = CGColorCreateGenericGray(1.0, 1.0);
+
     // Add border
     CALayer *bottomBorder = [CALayer layer];
     bottomBorder.borderColor = [NSColor grayColor].CGColor;
