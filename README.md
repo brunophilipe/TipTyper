@@ -1,6 +1,8 @@
-# Tiptyper
+# TipTyper
 
 The simple plain-text editor for OS X.
+
+**Notice**: TipTyper development has stopped. I have created a new text editor, [Noto](https://github.com/brunophilipe/Noto), which is inspired on the simplicity of TipTyper, but now written entirelly in Swift. Please have a look on it if you like TipTyper. Thanks!
 
 ## About
 
