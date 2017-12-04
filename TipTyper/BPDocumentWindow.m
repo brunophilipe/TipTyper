@@ -248,8 +248,6 @@ static NSTouchBarItemIdentifier BPTouchBarItemGoToLineIdentifier = @"com.brunoph
 				curLine++;
 			}
 		}];
-
-		range = NSMakeRange(lastRange.location+1, [string length] - (lastRange.location+1));
 	}
 	else
 	{
